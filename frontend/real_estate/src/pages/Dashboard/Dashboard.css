@@ -1,0 +1,29 @@
+.dashboard-bg{
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../../assets/house2.jpg');
+    height: 60vh;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.dashboard-head h1{
+    font-size: 2.8rem;
+    color: white;
+    text-align: center;
+    padding-top: 58px;
+}
+ul li{
+    list-style: none;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    /* text-align: center; */
+    color: #fff;
+    text-decoration: none;
+}
+.sidebar{
+    height: 70vh;
+}
+.log{
+    background-color: transparent;
+    color: #fff !important;
+    margin-left: -10px;
+}

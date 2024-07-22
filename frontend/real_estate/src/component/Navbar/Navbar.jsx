@@ -1,6 +1,5 @@
 // import React from "react";
 import "./Navbar.css"
-import { assets } from "../../assets/asset";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
@@ -16,7 +15,7 @@ function Navbar() {
       <nav class="navbar sticky-top navbar-expand-lg ">
         <div class="container-fluid">
           <Link to='/' class="navbar-brand">
-            <img src={assets.logo} alt="" />
+            RealEstate
           </Link>
           <button
             class="navbar-toggler"
@@ -54,7 +53,7 @@ function Navbar() {
                 </Link>
               </li>
               <li class="nav-item" >
-                <Link to = '#' class="btn btn-danger">
+                <Link to = '/login' class="btn btn-danger">
                   Login
                 </Link>
               </li>

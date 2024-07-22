@@ -1,8 +1,11 @@
+.navbar{
+    margin-top: 5px;
+}
 .navbar .nav-link{
     margin-right: 30px !important;
 }
 .navbar .navbar-brand{
-    margin-left: 10px !important;
+    margin: 5px 10px !important;
 }
 .navbar .active{
 	padding-bottom: 2px;

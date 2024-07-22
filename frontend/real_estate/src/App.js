@@ -5,6 +5,11 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import About from './pages/About/About'
 import Register from './pages/Register/Register'
+import Login from './pages/Login/Login'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Dashboard from './pages/Dashboard/Dashboard'
+
 
 function App() {
 
@@ -14,9 +19,10 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="about" element={<About/>} />
         <Route path="register" element={<Register/>} />
-        {/* <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} /> */}
+        <Route path="login" element={<Login/>} />
+        <Route path="dashboard" element={<Dashboard/>} />
       </Routes>
+      <ToastContainer theme='colored'/>
     </div>
   )
 }
