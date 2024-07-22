@@ -1,0 +1,17 @@
+.herobg{
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../../assets/house1.jpg');
+    height: 70vh;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.idea-con{
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 250px;
+    /* background-color: rgba(0,0,0,0.1); */
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
