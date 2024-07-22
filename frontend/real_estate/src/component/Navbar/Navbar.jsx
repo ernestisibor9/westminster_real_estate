@@ -59,7 +59,7 @@ function Navbar() {
                 </Link>
               </li>
               <li class="nav-item">
-                <Link to = '#' class="btn btn-danger">
+                <Link to = '/register' class="btn btn-danger">
                   SignUp
                 </Link>
               </li>
