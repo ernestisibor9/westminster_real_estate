@@ -53,6 +53,16 @@ function Navbar() {
                   Contact
                 </Link>
               </li>
+              <li class="nav-item" >
+                <Link to = '#' class="btn btn-danger">
+                  Login
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link to = '#' class="btn btn-danger">
+                  SignUp
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
