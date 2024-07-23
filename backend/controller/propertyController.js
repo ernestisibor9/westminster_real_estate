@@ -6,17 +6,17 @@ const User = require('../model/User');
 // Create property
 const createProperty = async (req, res) => {
     try{
+
         const {admin, title, description, price, image, location} = req.body
         // const user = await User.findById(req.body.userId );
         // console.log(user);
-        if (!title || !description || !price || !location || !image) {
-            return res.status(400).json({ message: 'All fields are required' });
-        }
+        // if (!title || !description || !price || !location || !image) {
+        //     return res.status(400).json({ message: 'All fields are required' });
+        // }
         // Image upload
         const imageName = req.file.filename
 		const newProperty = await Property.create(
             {
-                admin: admin,
                 title: title,
                 description: description,
                 price: price,
