@@ -29,11 +29,11 @@ const propertySchema = new mongoose.Schema(
       },
     featured: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     isAvailable: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   {

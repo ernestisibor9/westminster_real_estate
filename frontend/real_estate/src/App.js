@@ -9,6 +9,7 @@ import Login from './pages/Login/Login'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from './pages/Dashboard/Dashboard'
+import AddProperty from './pages/AddProperty/AddProperty'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="register" element={<Register/>} />
         <Route path="login" element={<Login/>} />
         <Route path="dashboard" element={<Dashboard/>} />
+        <Route path="add-property" element={<AddProperty/>} />
       </Routes>
       <ToastContainer theme='colored'/>
     </div>
