@@ -1,20 +1,47 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import "./AddProperty.css";
+import { assets } from "../../assets/asset";
 
 function AddProperty() {
-
-
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [price, setPrice] = useState();
   const [location, setLocation] = useState();
-  const [featured, setFeatured] = useState(false);
-  const [available, setAvailable] = useState(false);
-  const [image, setImage] = useState(null);
+  const [admin, setAdmin] = useState();
+  const [image, setImage] = useState(false);
+
+  console.log(admin);
+
+  // Get users details
+  const getPersonData = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("user"));
+      const response = await axios.get(
+        "http://localhost:5000/api/user/getloggedinuser",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.data.success) {
+        setAdmin(response.data.user._id);
+      } else {
+        toast.error("Invalid authorization");
+      }
+    } catch (error) {
+      toast.error(error);
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPersonData();
+  });
 
   // handleSubmit - to connect the backend to the frontend
   const handleSubmit = async (e) => {
@@ -25,9 +52,8 @@ function AddProperty() {
     formData.append("description", description);
     formData.append("price", price);
     formData.append("location", location);
+    formData.append("admin", admin);
     formData.append("image", image);
-    formData.append("featured", featured);
-    formData.append("available", available);
 
     if (
       title === "" ||
@@ -46,7 +72,7 @@ function AddProperty() {
           formData,
           {
             headers: {
-                Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${token}`,
               "Content-Type": "multipart/form-data",
             },
           }
@@ -119,6 +145,14 @@ function AddProperty() {
               <div className="card">
                 <h3 className="text-center pt-3">Add Property</h3>
                 <div className="card-body">
+                  <input
+                    type="hidden"
+                    className="form-control"
+                    name="admin"
+                    id=""
+                    value={admin}
+                    onChange={(e) => setAdmin(e.target.value)}
+                  />
                   <div class="row mb-3">
                     <div class="col">
                       <input
@@ -151,6 +185,17 @@ function AddProperty() {
                         onChange={(e) => setImage(e.target.files[0])}
                         aria-label="First name"
                       />
+                      <img
+                        src={
+                          image
+                            ? URL.createObjectURL(image)
+                            : assets.propertyphoto
+                        }
+                        alt=""
+                        width={100}
+                        height={100}
+                        className="mt-4 mb-3"
+                      />
                     </div>
                     <div class="col">
                       <input
@@ -165,46 +210,14 @@ function AddProperty() {
                   </div>
                   <div className="row mb-3">
                     <div className="col">
-                    <small>Description</small>
-                    <textarea
-                      class="form-control"
-                      name="description"
-                      onChange={(e) => setDescription(e.target.value)}
-                      id="exampleFormControlTextarea1"
-                      rows="3"
-                    ></textarea>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col">
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          name="featured"
-                          checked={featured} 
-                          onChange={(e) => setFeatured(e.target.checked)}
-                          id="featuredProperty"
-                        />
-                        <label class="form-check-label" for="featuredProperty">
-                          Featured Property
-                        </label>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          name="available"
-                          checked={available} 
-                          onChange={(e) => setAvailable(e.target.checked)}
-                          id="availableProperty"
-                        />
-                        <label class="form-check-label" for="availableProperty">
-                          Available Property
-                        </label>
-                      </div>
+                      <small>Description</small>
+                      <textarea
+                        class="form-control"
+                        name="description"
+                        onChange={(e) => setDescription(e.target.value)}
+                        id="exampleFormControlTextarea1"
+                        rows="3"
+                      ></textarea>
                     </div>
                   </div>
                   <div class="d-grid gap-2 mt-4 mb-2">

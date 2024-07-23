@@ -1,11 +1,51 @@
 // import React from "react";
 import "./Navbar.css"
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 
 function Navbar() {
     const [activeMenuItem, setActiveMenuItem] = useState('');
+    const [isAuthenticated, setIsAuthenticated] = useState();
+
+    // Logout
+    const navigate = useNavigate();
+    // logout
+    const logout = () => {
+      localStorage.removeItem("user");
+      // window.location.href = "/"; 
+      navigate("/login");
+    };
+
+      // Get users details
+  const getPersonData = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("user"));
+      const response = await axios.get(
+        "http://localhost:5000/api/user/getloggedinuser",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.data.success) {
+        setIsAuthenticated(response.data.user._id);
+      } else {
+        // toast.error("Invalid authorization");
+      }
+    } catch (error) {
+      toast.error(error);
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPersonData();
+  });
 
     const handleMenuItemClick = (menuItem) => {
         setActiveMenuItem(menuItem);
@@ -52,7 +92,23 @@ function Navbar() {
                   Contact
                 </Link>
               </li>
-              <li class="nav-item" >
+              {
+                isAuthenticated ? (
+                  <>
+                  <li class="nav-item" >
+                <button type="button" onClick={logout} class="btn btn-danger">
+                  Logout
+                </button>
+              </li>
+              <li class="nav-item">
+                <Link to = '/dashboard' class="btn btn-danger">
+                  Dashboard
+                </Link>
+              </li>
+                  </>
+                ): (
+                  <>
+                  <li class="nav-item" >
                 <Link to = '/login' class="btn btn-danger">
                   Login
                 </Link>
@@ -62,6 +118,9 @@ function Navbar() {
                   SignUp
                 </Link>
               </li>
+                  </>
+                )
+              }
             </ul>
           </div>
         </div>

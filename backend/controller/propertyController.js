@@ -17,12 +17,13 @@ const createProperty = async (req, res) => {
         const imageName = req.file.filename
 		const newProperty = await Property.create(
             {
+                admin: admin,
                 title: title,
                 description: description,
                 price: price,
                 image: imageName,
                 location: location,
-                admin: req.body.userId  // Assuming userId is passed in request body
+               // Assuming userId is passed in request body
             }
         );
         console.log(admin);

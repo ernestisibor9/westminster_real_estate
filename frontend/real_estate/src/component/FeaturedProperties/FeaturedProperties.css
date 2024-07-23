@@ -29,3 +29,11 @@ h3::after {
     opacity: 0.8; /* Change the opacity */
     margin-bottom: 10px;
 }
+.feat-style{
+    text-decoration: none;
+    color: #000;
+}
+.feat-style:hover{
+    text-decoration: none;
+    color: blue;
+}

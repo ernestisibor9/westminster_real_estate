@@ -1,84 +1,50 @@
-import React from "react";
-import { assets } from "../../assets/asset";
+import React, { useEffect, useState } from "react";
+// import { assets } from "../../assets/asset";
 import "./FeaturedProperties.css"
+import axios from "axios";
+import { Link } from "react-router-dom";
+
 
 function FeaturedProperties() {
+  const [featuredProperties, setFeaturedProperties] = useState([]);
+  console.log(featuredProperties);
+
+  // Get All Featured Poperties
+  const getAllFeaturedProperties = async () => {
+    const response = await axios.get(
+      "http://localhost:5000/api/property/featured-properties"
+    );
+    setFeaturedProperties(response.data);
+    console.log(response.data);
+  };
+  useEffect(() => {
+    getAllFeaturedProperties();
+  }, []);
+
+
+
+
   return (
     <div className="container mt-5">
       <div className="row justify-content-center text-center">
         <h3 className="text-center">Featured Properties</h3>
-        <div className="col-md-4 mt-3">
+        {featuredProperties.map((property)=>{
+          return(
+            <div className="col-md-4 mt-3">
           <div className="card shadow">
             <div className="card-body">
-              <img src={assets.house1} alt="" className="img-fluid hover-image" />
-              <h5>Home Addition</h5>
+              <Link to ='' className="feat-style">
+              <img src={require(`../../images/${property.image}`)} alt="" className="img-fluid hover-image" />
+              <h5>{property?.title}</h5>
               <p>
-                We invite you to explore our website, browse our listings, and
-                learn more about the services we offer.
+                {property?.description}
               </p>
+              </Link>
             </div>
           </div>
         </div>
-        <div className="col-md-4 mt-3">
-          <div className="card shadow">
-            <div className="card-body">
-              <img src={assets.house1} alt="" className="img-fluid hover-image" />
-              <h5>Home Addition</h5>
-              <p>
-                We invite you to explore our website, browse our listings, and
-                learn more about the services we offer.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4 mt-3">
-          <div className="card shadow">
-            <div className="card-body">
-              <img src={assets.house1} alt="" className="img-fluid hover-image" />
-              <h5>Home Addition</h5>
-              <p>
-                We invite you to explore our website, browse our listings, and
-                learn more about the services we offer.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4 mt-3">
-          <div className="card shadow">
-            <div className="card-body">
-              <img src={assets.house1} alt="" className="img-fluid hover-image" />
-              <h5>Home Addition</h5>
-              <p>
-                We invite you to explore our website, browse our listings, and
-                learn more about the services we offer.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4 mt-3">
-          <div className="card shadow">
-            <div className="card-body">
-              <img src={assets.house1} alt="" className="img-fluid hover-image" />
-              <h5>Home Addition</h5>
-              <p>
-                We invite you to explore our website, browse our listings, and
-                learn more about the services we offer.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4 mt-3">
-          <div className="card shadow">
-            <div className="card-body">
-              <img src={assets.house1} alt="" className="img-fluid hover-image" />
-              <h5>Home Addition</h5>
-              <p>
-                We invite you to explore our website, browse our listings, and
-                learn more about the services we offer.
-              </p>
-            </div>
-          </div>
-        </div>
+          )
+        })}
       </div>
     </div>
   );
