@@ -61,7 +61,7 @@ function Dashboard() {
                     <div>
                         <ul>
                             <li><Link to='/add-property' className="text-white text-decoration-none">Add Property</Link></li>
-                            <li><Link to='' className="text-white text-decoration-none">Users</Link></li>
+                            <li><Link to='/manage-property' className="text-white text-decoration-none">Manage Property</Link></li>
                             <li><Link to=''  className="text-white text-decoration-none">Settings</Link></li>
                             <li><button type="button" onClick={logout} className="btn log text-white">Logout</button></li>
                         </ul>

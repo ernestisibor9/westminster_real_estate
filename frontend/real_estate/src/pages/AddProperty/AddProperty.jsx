@@ -118,8 +118,8 @@ function AddProperty() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="" className="text-white text-decoration-none">
-                    Users
+                  <Link to="/manage-property" className="text-white text-decoration-none">
+                    Manage Property
                   </Link>
                 </li>
                 <li>

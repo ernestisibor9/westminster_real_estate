@@ -10,6 +10,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from './pages/Dashboard/Dashboard'
 import AddProperty from './pages/AddProperty/AddProperty'
+import ManageProperty from './pages/ManageProperty/ManageProperty'
+import ViewSingleProperty from './pages/ViewSingleProperty/ViewSingleProperty'
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
         <Route path="login" element={<Login/>} />
         <Route path="dashboard" element={<Dashboard/>} />
         <Route path="add-property" element={<AddProperty/>} />
+        <Route path="manage-property" element={<ManageProperty/>} />
+        <Route path="view-single-property/:id" element={<ViewSingleProperty/>} />
       </Routes>
       <ToastContainer theme='colored'/>
     </div>

@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllProperties, createProperty, countProperty, availableProperties, featuredProperties, countAvailableProperties, updateProperty, deleteProperty } = require('../controller/propertyController');
+const { getAllProperties, createProperty, countProperty, availableProperties, featuredProperties, countAvailableProperties, updateProperty, deleteProperty, getOneProperty, getSingleProperty } = require('../controller/propertyController');
 const authMiddleware = require('../middleware/authMiddleware');
 const route = express.Router();
 const multer  = require('multer')
@@ -21,7 +21,8 @@ const storage = multer.diskStorage({
 // All the routes for properties
 route.get('/get-all-properties', getAllProperties)
 route.get('/count-all-properties', countProperty)
-route.get('/get-single-property/:id', getAllProperties)
+route.get('/get-single-property/:id', getSingleProperty)
+route.get('/get-one-property/:id', getOneProperty)
 route.put('/update-property/:id', authMiddleware, updateProperty)
 route.put('/delete-property/:id', authMiddleware, deleteProperty)
 route.get('/available-properties', availableProperties)

@@ -60,6 +60,18 @@ const getSingleProperty = async (req, res) => {
     }
 };
 
+// View individual property
+const getOneProperty = async (req, res) => {
+    try {
+        const property = await Property.findById(req.params.id);
+        if (!property) return res.status(404).json({ message: 'Property not found' });
+        res.json(property);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
 // Count Property
 const countProperty = async (req, res) => {
     try {
@@ -153,4 +165,4 @@ const deleteProperty = async (req, res) => {
     }
 };
 
-module.exports = {getAllProperties, createProperty, getSingleProperty, countProperty, availableProperties, featuredProperties, countAvailableProperties, updateProperty, deleteProperty }
+module.exports = {getAllProperties, createProperty,  getOneProperty, getSingleProperty, countProperty, availableProperties, featuredProperties, countAvailableProperties, updateProperty, deleteProperty }
