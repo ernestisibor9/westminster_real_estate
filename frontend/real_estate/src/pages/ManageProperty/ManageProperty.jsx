@@ -12,6 +12,8 @@ function ManageProperty() {
   const [userInfo, setUserInfo] = useState();
   const [allProperties, setAllProperties] = useState([]);
 
+
+
   const getPersonData = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("user"));

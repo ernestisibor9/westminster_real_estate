@@ -55,7 +55,7 @@ function Navbar() {
       <nav class="navbar sticky-top navbar-expand-lg ">
         <div class="container-fluid">
           <Link to='/' class="navbar-brand">
-            RealEstate
+            <span className="text-dark fw-bold">Real</span><span className="text-danger fw-bold">Estate</span>
           </Link>
           <button
             class="navbar-toggler"

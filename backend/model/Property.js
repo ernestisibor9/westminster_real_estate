@@ -20,20 +20,21 @@ const propertySchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    image: {
-      type: String,
-    },
+    // image: {
+    //   type: String,
+    // },
+    image: [String],
     location: {
         type: String,
         required: true,
       },
-    featured: {
-      type: Boolean,
-      default: true,
+    propertyTypes: {
+        type: String,
+        required: true,
     },
-    isAvailable: {
-      type: Boolean,
-      default: true,
+    propertyFor: {
+        type: String,
+        required: true,
     },
   },
   {

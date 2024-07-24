@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllProperties, createProperty, countProperty, availableProperties, featuredProperties, countAvailableProperties, updateProperty, deleteProperty, getOneProperty, getSingleProperty } = require('../controller/propertyController');
+const { getAllProperties, createProperty, countProperty, availableProperties, featuredProperties, countAvailableProperties, updateProperty, deleteProperty, getOneProperty, getSingleProperty, featuredStatus } = require('../controller/propertyController');
 const authMiddleware = require('../middleware/authMiddleware');
 const route = express.Router();
 const multer  = require('multer')
@@ -27,8 +27,10 @@ route.put('/update-property/:id', authMiddleware, updateProperty)
 route.put('/delete-property/:id', authMiddleware, deleteProperty)
 route.get('/available-properties', availableProperties)
 route.get('/featured-properties', featuredProperties)
+route.put('/featured-property/status/:id', featuredStatus)
 route.get('/count-available-properties', countAvailableProperties)
-route.post('/create-properties', authMiddleware, upload.single('image'), createProperty)
+route.post('/create-properties', authMiddleware, upload.array('image', 5), createProperty)
+// route.post('/create-properties', authMiddleware, upload.single('image'), createProperty)
 
 
 module.exports = route;

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import "./AddProperty.css";
-import { assets } from "../../assets/asset";
+// import { assets } from "../../assets/asset";
 
 function AddProperty() {
   const [title, setTitle] = useState();
@@ -12,7 +12,10 @@ function AddProperty() {
   const [price, setPrice] = useState();
   const [location, setLocation] = useState();
   const [admin, setAdmin] = useState();
-  const [image, setImage] = useState(false);
+  const [propertyTypes, setPropertyTypes] = useState();
+  const [propertyFor, setPropertyFor] = useState();
+  const [image, setImage] = useState([]);
+  const [imagePreviews, setImagePreviews] = useState([]);
 
   console.log(admin);
 
@@ -43,6 +46,15 @@ function AddProperty() {
     getPersonData();
   });
 
+  // Handleupload
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    setImage(files);
+
+    const previews = files.map((file) => URL.createObjectURL(file));
+    setImagePreviews(previews);
+  };
+
   // handleSubmit - to connect the backend to the frontend
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,8 +64,13 @@ function AddProperty() {
     formData.append("description", description);
     formData.append("price", price);
     formData.append("location", location);
+    formData.append("propertyTypes", propertyTypes);
+    formData.append("propertyFor", propertyFor);
     formData.append("admin", admin);
-    formData.append("image", image);
+    for (let i = 0; i < image.length; i++) {
+      formData.append("image", image[i]);
+    }
+    // formData.append("image", image);
 
     if (
       title === "" ||
@@ -80,6 +97,7 @@ function AddProperty() {
         console.log(response.data.property);
         if (response.data.success) {
           toast.success(response.data.message);
+          // setUploadedImg(true);
         } else {
           toast.error(response.data.message);
         }
@@ -118,7 +136,10 @@ function AddProperty() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/manage-property" className="text-white text-decoration-none">
+                  <Link
+                    to="/manage-property"
+                    className="text-white text-decoration-none"
+                  >
                     Manage Property
                   </Link>
                 </li>
@@ -155,6 +176,7 @@ function AddProperty() {
                   />
                   <div class="row mb-3">
                     <div class="col">
+                      <small>Property Title</small>
                       <input
                         type="text"
                         class="form-control"
@@ -165,6 +187,7 @@ function AddProperty() {
                       />
                     </div>
                     <div class="col">
+                    <small>Price</small>
                       <input
                         type="text"
                         class="form-control"
@@ -176,16 +199,59 @@ function AddProperty() {
                     </div>
                   </div>
                   <div class="row mb-3">
+                    <div class="col">
+                    <small>Property Type</small>
+                      <select
+                        class="form-select"
+                        aria-label="Default select example"
+                        name="propertyTypes"
+                        onChange={(e) => setPropertyTypes(e.target.value)}
+                      >
+                        <option disabled>Select Property Type</option>
+                        <option value="land">Land</option>
+                        <option value="building">Building</option>
+                        <option value="flat">Flat</option>
+                      </select>
+                    </div>
+                    <div class="col">
+                    <small>Property For</small>
+                    <select
+                        class="form-select"
+                        aria-label="Default select example"
+                        name="propertyFor"
+                        onChange={(e) => setPropertyFor(e.target.value)}
+                      >
+                        <option disabled>Property For</option>
+                        <option value="buy">Buy</option>
+                        <option value="rent">Rent</option>
+                        <option value="lease">Lease</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
                     <small>Upload Photo</small>
                     <div class="col">
                       <input
                         type="file"
+                        multiple
                         class="form-control"
                         name="image"
-                        onChange={(e) => setImage(e.target.files[0])}
+                        onChange={handleImageChange}
                         aria-label="First name"
                       />
-                      <img
+                      <div className="d-flex justify-content-around mt-4">
+                        {imagePreviews.map((preview, index) => (
+                          <img
+                            key={index}
+                            src={preview}
+                            alt=""
+                            className="img-fluid"
+                            width={100}
+                            height={100}
+                          />
+                        ))}
+                      </div>
+                      {/* <img
                         src={
                           image
                             ? URL.createObjectURL(image)
@@ -195,9 +261,10 @@ function AddProperty() {
                         width={100}
                         height={100}
                         className="mt-4 mb-3"
-                      />
+                      /> */}
                     </div>
                     <div class="col">
+                  
                       <input
                         type="text"
                         className="form-control"

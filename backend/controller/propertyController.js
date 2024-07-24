@@ -7,26 +7,31 @@ const User = require('../model/User');
 const createProperty = async (req, res) => {
     try{
 
-        const {admin, title, description, price, image, location} = req.body
+        const {admin, title, description, price, image, location, propertyTypes, propertyFor} = req.body
         // const user = await User.findById(req.body.userId );
         // console.log(user);
         // if (!title || !description || !price || !location || !image) {
         //     return res.status(400).json({ message: 'All fields are required' });
         // }
         // Image upload
-        const imageName = req.file.filename
+        // const imageName = req.file.filename
+        const files = req.files;
+        const urls = files.map(file => `${file.filename}`);
+        // ../frontend/real_estate/src/images/
+
 		const newProperty = await Property.create(
             {
                 admin: admin,
                 title: title,
                 description: description,
                 price: price,
-                image: imageName,
+                image: urls,
                 location: location,
+                propertyTypes: propertyTypes,
+                propertyFor: propertyFor,  // Assuming propertyType and propertyFor are passed in request body
                // Assuming userId is passed in request body
             }
         );
-        console.log(admin);
 		return res.status(201).json({
             success: true,
             message: "Property created successfully",
@@ -165,4 +170,22 @@ const deleteProperty = async (req, res) => {
     }
 };
 
-module.exports = {getAllProperties, createProperty,  getOneProperty, getSingleProperty, countProperty, availableProperties, featuredProperties, countAvailableProperties, updateProperty, deleteProperty }
+// Featured
+const featuredStatus = async (req, res) => {
+    try {
+        const item = await Property.findById(req.params.id);
+        if (!item) {
+            return res.status(404).json({ message: 'Property not found' });
+        }
+
+        // Toggle status between 'active' and 'pending'
+        item.featured = item.featured === 'featured' ? 'featured' : 'non-featured';
+        await item.save();
+
+        res.json({ featured: item.featured });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error });
+    }
+};
+
+module.exports = {getAllProperties, createProperty, featuredStatus,  getOneProperty, getSingleProperty, countProperty, availableProperties, featuredProperties, countAvailableProperties, updateProperty, deleteProperty }
