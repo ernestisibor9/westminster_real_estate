@@ -188,4 +188,27 @@ const featuredStatus = async (req, res) => {
     }
 };
 
-module.exports = {getAllProperties, createProperty, featuredStatus,  getOneProperty, getSingleProperty, countProperty, availableProperties, featuredProperties, countAvailableProperties, updateProperty, deleteProperty }
+// Update the properties with multiple images
+const updateMultipleImages = async (req, res) => {
+    try {
+        const propertyId = req.params.id;
+        const updates = {
+          title: req.body.title,
+          description: req.body.description,
+          price: req.body.price,
+          location: req.body.location,
+          propertyTypes: req.body.propertyTypes,
+          propertyFor: req.body.propertyFor,
+          // Append new image URLs to existing ones
+          image: req.files ? req.files.map(file => file.path) : req.body.existingPhotos,
+        };
+    
+        const updatedProperty = await Property.findByIdAndUpdate(propertyId, updates, { new: true });
+        res.status(200).json(updatedProperty);
+      } catch (error) {
+        res.status(500).json({ message: 'Server error', error });
+      }
+};
+
+
+module.exports = {getAllProperties, createProperty, featuredStatus, updateMultipleImages,  getOneProperty, getSingleProperty, countProperty, availableProperties, featuredProperties, countAvailableProperties, updateProperty, deleteProperty }

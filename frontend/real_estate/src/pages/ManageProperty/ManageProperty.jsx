@@ -12,8 +12,6 @@ function ManageProperty() {
   const [userInfo, setUserInfo] = useState();
   const [allProperties, setAllProperties] = useState([]);
 
-
-
   const getPersonData = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("user"));
@@ -42,15 +40,15 @@ function ManageProperty() {
   });
 
   // Get All Poperties
-  const getAllFeaturedProperties = async () => {
+  const getAllProperties = async () => {
     const response = await axios.get(
-      "http://localhost:5000/api/property/featured-properties"
+      "http://localhost:5000/api/property/get-all-properties"
     );
     setAllProperties(response.data);
     console.log(response.data);
   };
   useEffect(() => {
-    getAllFeaturedProperties();
+    getAllProperties();
   }, []);
 
   const navigate = useNavigate();
@@ -73,6 +71,14 @@ function ManageProperty() {
           <div className="col-md-2 bg-primary sidebar">
             <div>
               <ul>
+                <li>
+                  <Link
+                    to="/dashboard"
+                    className="text-white text-decoration-none"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
                 <li>
                   <Link
                     to="/add-property"
@@ -121,15 +127,43 @@ function ManageProperty() {
                   return (
                     <tr>
                       <th scope="row">{index + 1}</th>
-                      <td><img src={require(`../../images/${property.image}`)} alt="" width={80} height={70}/></td>
+                      <td>
+                        {property.image.length > 0 && (
+                          <img
+                            src={require(`../../images/${property.image[0]}`)}
+                            alt=""
+                            className=""
+                            width={80}
+                            height={70}
+                          />
+                        )}
+                      </td>
                       <td>{property.title}</td>
                       <td>{property.location}</td>
                       <td>&pound;{property.price}</td>
                       {/* <td>{property.description(0, 20)}</td> */}
                       <td>
-                        <Link to={`/view-single-property/${property._id}`} className="p-2 fs-5 text-success" title="View Property"><FaEye /></Link>
-                        <Link to='' className="p-2 fs-5 text-primary" title="Edit Property"><FaEdit /></Link>
-                        <Link to='' className="p-2 fs-5 text-danger" title="Delete Property"><MdDelete /></Link>
+                        <Link
+                          to={`/view-single-property/${property._id}`}
+                          className="p-2 fs-5 text-success"
+                          title="View Property"
+                        >
+                          <FaEye />
+                        </Link>
+                        <Link
+                          to=""
+                          className="p-2 fs-5 text-primary"
+                          title="Edit Property"
+                        >
+                          <FaEdit />
+                        </Link>
+                        <Link
+                          to=""
+                          className="p-2 fs-5 text-danger"
+                          title="Delete Property"
+                        >
+                          <MdDelete />
+                        </Link>
                       </td>
                     </tr>
                   );
@@ -140,10 +174,6 @@ function ManageProperty() {
           <div className="col-md-1"></div>
         </div>
       </div>
-      <h1>Dashboard</h1>
-      <button className="btn btn-danger" onClick={logout}>
-        Logout
-      </button>
     </div>
   );
 }

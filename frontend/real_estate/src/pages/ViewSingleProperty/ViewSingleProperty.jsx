@@ -4,10 +4,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 // import { toast } from "react-toastify";
 
 import "./ViewSingleProperty.css";
-// import { assets } from "../../assets/asset";
+
 
 function ViewSingleProperty() {
   const [singleProperty, setSingleProperty] = useState();
+  console.log(singleProperty?.image);
 
   const { id } = useParams();
 
@@ -36,19 +37,19 @@ function ViewSingleProperty() {
     navigate("/login");
   };
 
-  let imageSrc;
-  try {
-    imageSrc = require(`../../images/${singleProperty?.image}`);
-  } catch (err) {
-    console.error("Image not found:", err);
-    imageSrc = require("../../images/propertyphoto.png"); // fallback to a default image
-  }
+//   let imageSrc;
+//   try {
+//     imageSrc = require(`../../images/${singleProperty?.image}`);
+//   } catch (err) {
+//     console.error("Image not found:", err);
+//     imageSrc = require("../../images/propertyphoto.png"); // fallback to a default image
+//   }
 
   return (
     <div>
       <div className="dashboard-bg">
         <div className="dashboard-head">
-          <h1>Dashboard</h1>
+          <h1>Property Details</h1>
         </div>
       </div>
       <div className="container-fluid">
@@ -56,6 +57,14 @@ function ViewSingleProperty() {
           <div className="col-md-2 bg-primary sidebar">
             <div>
               <ul>
+              <li>
+                  <Link
+                    to="/dashboard"
+                    className="text-white text-decoration-none"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
                 <li>
                   <Link
                     to="/add-property"
@@ -90,11 +99,7 @@ function ViewSingleProperty() {
             </div>
           </div>
           <div className="col-md-1"></div>
-          <div className="col-md-3 mt-4 text-center">
-            <img src={imageSrc} alt="" className="img-fluid" />
-          </div>
-          <div className="col-md-1"></div>
-          <div className="col-md-4 mt-4">
+          <div className="col-md-2 mt-4">
             <h6>
               <span className="fw-bold">Property Title:</span>{" "}
               {singleProperty?.title}
@@ -112,15 +117,24 @@ function ViewSingleProperty() {
               {singleProperty?.price}
             </h6>
             <h6>
-              <span className="fw-bold">Agent Name:</span>{" "}
-              {singleProperty?.admin?.name}
+              <span className="fw-bold">Property Type:</span>{" "}
+              {singleProperty?.propertyTypes}
             </h6>
             <h6>
-              <span className="fw-bold">Phone:</span>{" "}
-              {singleProperty?.admin?.phone}
+              <span className="fw-bold">To:</span>{" "}
+              {singleProperty?.propertyFor}
             </h6>
           </div>
-          <div className="col-md-1"></div>
+          <div className="col-md-2 d-flex mt-4 text-center">
+            {
+                singleProperty?.image.map((photo)=>{
+                    return(
+                        <img src={require(`../../images/${photo}`)} alt="" className="" width={220} height={220}/>
+                    )
+                })
+            }
+          </div>
+          <div className="col-md-1"></div>        
         </div>
       </div>
     </div>

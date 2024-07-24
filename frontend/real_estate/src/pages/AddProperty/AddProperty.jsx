@@ -127,6 +127,14 @@ function AddProperty() {
           <div className="col-md-2 bg-primary sidebar">
             <div>
               <ul>
+              <li>
+                  <Link
+                    to="/dashboard"
+                    className="text-white text-decoration-none"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
                 <li>
                   <Link
                     to="/add-property"
@@ -264,7 +272,6 @@ function AddProperty() {
                       /> */}
                     </div>
                     <div class="col">
-                  
                       <input
                         type="text"
                         className="form-control"
