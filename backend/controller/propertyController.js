@@ -200,11 +200,17 @@ const updateMultipleImages = async (req, res) => {
           propertyTypes: req.body.propertyTypes,
           propertyFor: req.body.propertyFor,
           // Append new image URLs to existing ones
-          image: req.files ? req.files.map(file => file.path) : req.body.existingPhotos,
+          image: req.files.map(file => `${file.filename}`) 
         };
+        // ? req.files.map(file => file.path) : req.body.existingPhotos,
     
         const updatedProperty = await Property.findByIdAndUpdate(propertyId, updates, { new: true });
-        res.status(200).json(updatedProperty);
+        // res.status(200).json(updatedProperty);
+        return res.status(201).json({
+            success: true,
+            message: "Property updated successfully",
+            updatedProperty: updatedProperty,
+        })
       } catch (error) {
         res.status(500).json({ message: 'Server error', error });
       }

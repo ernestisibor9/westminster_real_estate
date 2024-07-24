@@ -12,6 +12,7 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import AddProperty from './pages/AddProperty/AddProperty'
 import ManageProperty from './pages/ManageProperty/ManageProperty'
 import ViewSingleProperty from './pages/ViewSingleProperty/ViewSingleProperty'
+import EditProperty from './pages/EditProperty/EditProperty'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="add-property" element={<AddProperty/>} />
         <Route path="manage-property" element={<ManageProperty/>} />
         <Route path="view-single-property/:id" element={<ViewSingleProperty/>} />
+        <Route path="edit-property/:id" element={<EditProperty/>} />
       </Routes>
       <ToastContainer theme='colored'/>
     </div>

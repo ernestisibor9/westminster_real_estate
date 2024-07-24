@@ -151,7 +151,7 @@ function ManageProperty() {
                           <FaEye />
                         </Link>
                         <Link
-                          to=""
+                          to={`/edit-property/${property._id}`}
                           className="p-2 fs-5 text-primary"
                           title="Edit Property"
                         >
