@@ -116,10 +116,6 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <h1>Dashboard</h1>
-      <button className="btn btn-danger" onClick={logout}>
-        Logout
-      </button>
     </div>
   );
 }

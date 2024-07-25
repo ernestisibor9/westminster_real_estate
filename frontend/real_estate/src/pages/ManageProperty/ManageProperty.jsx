@@ -5,12 +5,14 @@ import { toast } from "react-toastify";
 import { FaEye, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
+
 import "./ManageProperty.css";
 // import { assets } from "../../assets/asset";
 
 function ManageProperty() {
   const [userInfo, setUserInfo] = useState();
   const [allProperties, setAllProperties] = useState([]);
+  const [selectedImages, setSelectedImages] = useState([]);
 
   const getPersonData = async () => {
     try {
@@ -58,6 +60,31 @@ function ManageProperty() {
     // window.location.href = "/";
 
     navigate("/login");
+  };
+
+   // Delete Product
+   const deleteProperty = async (id) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("user"));
+      const response = await axios.delete(
+        `http://localhost:5000/api/property/delete-property/${id}`,  {
+          data: { image: selectedImages },
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+      }
+      );
+      if (response.data.success) {
+        toast.success(response.data.message);
+        setSelectedImages([]);
+        getAllProperties();
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div>
@@ -157,10 +184,10 @@ function ManageProperty() {
                         >
                           <FaEdit />
                         </Link>
-                        <Link
-                          to=""
+                        <Link 
                           className="p-2 fs-5 text-danger"
                           title="Delete Property"
+                          onClick={()=>deleteProperty(property._id)}
                         >
                           <MdDelete />
                         </Link>

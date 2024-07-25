@@ -8,8 +8,8 @@ function Hero() {
         <div class="container">
           <div class="col-md-12">
             <h1 className="agent">
-              Agents. Tours. <br />
-              Loans. Homes.
+              Buy. Rent. <br />
+              Lease. Homes.
             </h1> <br/>
             <button type="button" className="btn btn-outline-light">Explore Home</button>
           </div>

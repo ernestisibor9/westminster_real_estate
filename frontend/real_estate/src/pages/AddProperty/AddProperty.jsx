@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+
 import "./AddProperty.css";
 // import { assets } from "../../assets/asset";
 
@@ -98,6 +99,7 @@ function AddProperty() {
         if (response.data.success) {
           toast.success(response.data.message);
           // setUploadedImg(true);
+          // navigate("/manage-property");
         } else {
           toast.error(response.data.message);
         }

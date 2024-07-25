@@ -70,6 +70,16 @@ function Navbar() {
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li>
+              <form action="">
+              <input
+                type="text"
+                class="form-control me-2 nav-item"
+                placeholder="Search"
+                aria-label="Search"
+              />
+            </form>
+              </li>
               <li className={`nav-item ${activeMenuItem === 'home' ? 'active' : ''}`}
                     onClick={() => handleMenuItemClick('home')}>
                 <Link to='/' class="nav-link" aria-current="page">
@@ -85,6 +95,11 @@ function Navbar() {
               <li class="nav-item">
                 <Link to='#' class="nav-link">
                   Services
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link to='/list-property' class="nav-link">
+                  Properties
                 </Link>
               </li>
               <li class="nav-item">

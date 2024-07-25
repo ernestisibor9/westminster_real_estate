@@ -46,7 +46,7 @@ const createProperty = async (req, res) => {
 // List all properties
 const getAllProperties = async (req, res) => {
     try {
-        const properties = await Property.find().populate('admin', '-password');;
+        const properties = await Property.find().sort({ createdAt: -1 }).populate('admin', '-password');;
         res.json(properties);
     console.log(properties[0].admin.name);
     } catch (error) {
@@ -151,10 +151,15 @@ const updateProperty = async (req, res) => {
 // Delete property
 const deleteProperty = async (req, res) => {
     try {
+        const {image} = req.body;
         const findProperty = await Property.findById(req.params.id);
         if(!findProperty){
             return res.status(403).json({ message: 'Invalid Property id' });
         }
+        // Remove images from the product's images array
+        findProperty.image = findProperty.image.filter(image => !image.includes(image));
+
+        await findProperty.save();
         if(findProperty.admin.toString()!== req.body.userId.toString()){
             throw new Error ("You are not allowed to delete other people's properties")
         }
