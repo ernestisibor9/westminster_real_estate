@@ -275,6 +275,26 @@ const existingProperties = async (req, res) => {
   }
 };
 
+// Search for properties to buy, rent and lease
+const propertiesFor = async(req, res)=>{
+  const { propertyFor } = req.body;
+    if (!propertyFor) {
+        return res.status(400).json({ message: "propertyFor is required" });
+    }
+
+    try {
+        const properties = await Property.find({ propertyFor });
+        if (properties.length === 0) {
+            return res.status(404).json({ message: "No properties found " });
+        }
+        res.json(properties);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "An error occurred while fetching properties" });
+    }
+}
+
+
 module.exports = {
   getAllProperties,
   createProperty,
@@ -289,4 +309,5 @@ module.exports = {
   updateProperty,
   deleteProperty,
   existingProperties,
+  propertiesFor,
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import "./Hero.css";
+import { Link } from "react-router-dom";
 
 function Hero() {
   return (
@@ -9,9 +10,9 @@ function Hero() {
           <div class="col-md-12">
             <h1 className="agent">
               Buy. Rent. <br />
-              Lease. Homes.
+              Lease Properties.
             </h1> <br/>
-            <button type="button" className="btn btn-outline-light">Explore Home</button>
+            <Link to = '/list-property' type="button" className="btn btn-outline-light">Explore Properties</Link>
           </div>
         </div>
       </div>

@@ -7,6 +7,9 @@ import { FaSearch } from "react-icons/fa";
 
 function ListProperties() {
   const [featuredProperties, setFeaturedProperties] = useState([]);
+  const [propertyFor, setPropertyFor] = useState('');
+
+  const categories = ["buy", "rent", "lease"]; 
 
   // Search properties
   const [query, setQuery] = useState("");
@@ -26,7 +29,7 @@ function ListProperties() {
         const response = await axios.post("http://localhost:5000/api/property/search-by-location", { query });
         setFeaturedProperties(response.data);
     } catch (err) {
-        setError('Error fetching properties');
+        setError('No such property');
         console.error(err);
     }
     setLoading(false);
@@ -35,6 +38,30 @@ function ListProperties() {
 useEffect(() => {
     handleSearch(query);
 }, [query]);
+
+
+// Property for
+const handleFilter = async (propertyFor) => {
+  if (!propertyFor) {
+      setFeaturedProperties([]);
+      setLoading(false);
+      return;
+  }
+  setLoading(true);
+  setError('');
+  try {
+      const response = await axios.post('http://localhost:5000/api/property/search-for', { propertyFor });
+      setFeaturedProperties(response.data);
+  } catch (err) {
+      setError('No such property');
+      console.error(err);
+  }
+  setLoading(false);
+};
+
+useEffect(() => {
+  handleFilter(propertyFor);
+}, [propertyFor]);
 
   // Get All Featured Poperties
   const getAllFeaturedProperties = async () => {
@@ -60,7 +87,7 @@ useEffect(() => {
       <div className="container mt-5">
         <div className="row justify-content-center text-center">
           <h3 className="text-center">List of Properties</h3>
-          <div className="d-flex">
+          <div className="d-flex mt-3">
             <div className="d-flex">
               <input
                 type="text"
@@ -73,17 +100,22 @@ useEffect(() => {
               />
               <FaSearch class="search-icon"/>
               <div className="">
-              <select class="form-select sel" aria-label="Default select example">
-  <option selected disabled>Search by</option>
-  <option value="1">Buy</option>
-  <option value="2">Rent</option>
-  <option value="3">Lease</option>
+              <form action="">
+              <select class="form-select sel" value={propertyFor} onChange={(e) => setPropertyFor(e.target.value)}>
+  <option selected disabled>Search to</option>
+  {categories.map(cat => (
+                    <option key={cat} value={cat}>Search to {cat}</option>
+                ))}
 </select>
+
+              </form>
               </div>
             </div>
           </div>
+          <div className="mt-3 text-danger fw-bold">
           {loading && <p>Loading...</p>}
-            {error && <p>{error}</p>}
+          {error && <p>{error}</p>}
+          </div>
           {limitFeatured.map((property) => {
             return (
               <div className="col-md-4 mt-3">
