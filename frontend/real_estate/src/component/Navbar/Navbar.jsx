@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
+// import Search from "../Search/Search";
 
 
 function Navbar() {
@@ -79,6 +80,7 @@ function Navbar() {
                 aria-label="Search"
               />
             </form>
+            {/* <Search/> */}
               </li>
               <li className={`nav-item ${activeMenuItem === 'home' ? 'active' : ''}`}
                     onClick={() => handleMenuItemClick('home')}>

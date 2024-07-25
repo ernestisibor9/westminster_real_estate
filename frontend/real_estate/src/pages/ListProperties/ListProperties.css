@@ -1,0 +1,19 @@
+
+/* Input field styling */
+#search {
+    position: relative;
+}
+
+/* Search icon styling */
+.search-icon {
+    position: absolute;
+    right: 10px;
+    left: 280px;
+    font-size: 20px;
+    margin-top: 7px;
+    color: grey;
+}
+.sel{
+    width: 250px !important;
+    margin-left: 100px;
+}
