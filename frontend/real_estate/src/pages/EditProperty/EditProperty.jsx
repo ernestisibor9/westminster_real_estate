@@ -19,7 +19,7 @@ function EditProperty() {
   const [propertyFor, setPropertyFor] = useState();
   const [image, setImage] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
-  const [existingPhotos, setExistingPhotos] = useState(image || []);
+  // const [existingPhotos, setExistingPhotos] = useState(image || []);
 
  
       // API to get individual property
@@ -92,10 +92,17 @@ function EditProperty() {
     formData.append("propertyTypes", propertyTypes);
     formData.append("propertyFor", propertyFor);
     formData.append("admin", admin);
-    formData.append('existingPhotos', JSON.stringify(existingPhotos));
-    for (let i = 0; i < image.length; i++) {
-      formData.append("image", image[i]);
+  
+    // if (existingPhotos.length > 0) {
+    //   formData.append("existingPhotos", JSON.stringify(existingPhotos));
+    // }
+
+    if (image) {
+      for (let i = 0; i < image.length; i++) {
+        formData.append("image", image[i]);
+      }
     }
+    
     // formData.append("image", image);
 
     if (
@@ -123,6 +130,7 @@ function EditProperty() {
         console.log(response.data);
         if (response.data.success) {
           toast.success(response.data.message);
+          // setExistingPhotos(response.data)
           // setUploadedImg(true);
         } else {
           toast.error(response.data.message);
@@ -175,6 +183,11 @@ function EditProperty() {
                     className="text-white text-decoration-none"
                   >
                     Manage Property
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/list-properties" className="text-white text-decoration-none">
+                    List Properties
                   </Link>
                 </li>
                 <li>
@@ -277,7 +290,7 @@ function EditProperty() {
                         aria-label="First name"
                       />
                       <div className="d-flex justify-content-around mt-4">
-                        {imagePreviews.map((preview, index) => (
+                        {image && imagePreviews.map((preview, index) => (
                           <img
                             key={index}
                             src={preview}

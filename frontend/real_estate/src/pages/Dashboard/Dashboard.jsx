@@ -81,8 +81,8 @@ function Dashboard() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="" className="text-white text-decoration-none">
-                    Settings
+                  <Link to="/list-properties" className="text-white text-decoration-none">
+                    List Properties
                   </Link>
                 </li>
                 <li>

@@ -234,7 +234,10 @@ const updateMultipleImages = async (req, res) => {
       propertyTypes: req.body.propertyTypes,
       propertyFor: req.body.propertyFor,
       // Append new image URLs to existing ones
-      image: req.files.map((file) => `${file.filename}`),
+      // image: req.files.map((file) => `${file.filename}`),
+      image: req.body.image
+       ? req.body.image
+        : req.files.map((file) => `${file.filename}`), // Existing photos should be an array of image filenames
     };
     // ? req.files.map(file => file.path) : req.body.existingPhotos,
 
