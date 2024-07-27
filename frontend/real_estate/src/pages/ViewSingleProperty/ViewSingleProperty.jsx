@@ -7,8 +7,38 @@ import "./ViewSingleProperty.css";
 
 
 function ViewSingleProperty() {
+  const [isAuthenticated, setIsAuthenticated] = useState();
+
   const [singleProperty, setSingleProperty] = useState();
   console.log(singleProperty?.image);
+
+
+  const getPersonData = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("user"));
+      const response = await axios.get(
+        "http://localhost:5000/api/user/getloggedinuser",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.data.success) {
+        setIsAuthenticated(response.data.user.role);
+        // console.log(userInfo);
+      } else {
+        
+      }
+    } catch (error) {
+      
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPersonData();
+  });
 
   const { id } = useParams();
 
@@ -56,8 +86,8 @@ function ViewSingleProperty() {
         <div className="row">
           <div className="col-md-2 bg-primary sidebar">
             <div>
-              <ul>
-              <li>
+            <ul>
+                <li>
                   <Link
                     to="/dashboard"
                     className="text-white text-decoration-none"
@@ -65,30 +95,33 @@ function ViewSingleProperty() {
                     Dashboard
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/add-property"
-                    className="text-white text-decoration-none"
-                  >
-                    Add Property
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/manage-property"
-                    className="text-white text-decoration-none"
-                  >
-                    Manage Property
-                  </Link>
-                </li>
+                {
+                  isAuthenticated === "admin" && (
+                    <li>
+                      <Link
+                        to="/add-property"
+                        className="text-white text-decoration-none"
+                      >
+                        Add Property
+                      </Link>
+                    </li>
+                  )
+                }
+                {
+                  isAuthenticated === "admin" && (
+                    <li>
+                      <Link
+                        to="/manage-property"
+                        className="text-white text-decoration-none"
+                      >
+                        Manage Property
+                      </Link>
+                    </li>
+                  )
+                }
                 <li>
                   <Link to="/list-properties" className="text-white text-decoration-none">
                     List Properties
-                  </Link>
-                </li>
-                <li>
-                  <Link to="" className="text-white text-decoration-none">
-                    Settings
                   </Link>
                 </li>
                 <li>

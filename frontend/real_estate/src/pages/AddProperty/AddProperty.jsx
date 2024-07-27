@@ -8,6 +8,8 @@ import "./AddProperty.css";
 // import { assets } from "../../assets/asset";
 
 function AddProperty() {
+  const [isAuthenticated, setIsAuthenticated] = useState();
+
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [price, setPrice] = useState();
@@ -34,6 +36,7 @@ function AddProperty() {
       );
       if (response.data.success) {
         setAdmin(response.data.user._id);
+        setIsAuthenticated(response.data.user.role);
       } else {
         toast.error("Invalid authorization");
       }
@@ -128,8 +131,8 @@ function AddProperty() {
         <div className="row">
           <div className="col-md-2 bg-primary sidebar">
             <div>
-              <ul>
-              <li>
+            <ul>
+                <li>
                   <Link
                     to="/dashboard"
                     className="text-white text-decoration-none"
@@ -137,30 +140,33 @@ function AddProperty() {
                     Dashboard
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/add-property"
-                    className="text-white text-decoration-none"
-                  >
-                    Add Property
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/manage-property"
-                    className="text-white text-decoration-none"
-                  >
-                    Manage Property
-                  </Link>
-                </li>
+                {
+                  isAuthenticated === "admin" && (
+                    <li>
+                      <Link
+                        to="/add-property"
+                        className="text-white text-decoration-none"
+                      >
+                        Add Property
+                      </Link>
+                    </li>
+                  )
+                }
+                {
+                  isAuthenticated === "admin" && (
+                    <li>
+                      <Link
+                        to="/manage-property"
+                        className="text-white text-decoration-none"
+                      >
+                        Manage Property
+                      </Link>
+                    </li>
+                  )
+                }
                 <li>
                   <Link to="/list-properties" className="text-white text-decoration-none">
                     List Properties
-                  </Link>
-                </li>
-                <li>
-                  <Link to="" className="text-white text-decoration-none">
-                    Settings
                   </Link>
                 </li>
                 <li>

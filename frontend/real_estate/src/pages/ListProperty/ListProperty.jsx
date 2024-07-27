@@ -6,10 +6,39 @@ import { FaSearch } from "react-icons/fa";
 // import { toast } from "react-toastify";
 
 function ListProperty() {
+  const [isAuthenticated, setIsAuthenticated] = useState();
+
   const [featuredProperties, setFeaturedProperties] = useState([]);
   const [propertyFor, setPropertyFor] = useState("");
 
   const categories = ["buy", "rent", "lease"];
+
+  const getPersonData = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("user"));
+      const response = await axios.get(
+        "http://localhost:5000/api/user/getloggedinuser",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.data.success) {
+        setIsAuthenticated(response.data.user.role);
+        // console.log(userInfo);
+      } else {
+        
+      }
+    } catch (error) {
+     
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPersonData();
+  });
 
   // Search properties
   const [query, setQuery] = useState("");
@@ -101,7 +130,7 @@ function ListProperty() {
         <div className="row">
           <div className="col-md-2 bg-primary sidebar">
             <div>
-              <ul>
+            <ul>
                 <li>
                   <Link
                     to="/dashboard"
@@ -110,30 +139,33 @@ function ListProperty() {
                     Dashboard
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/add-property"
-                    className="text-white text-decoration-none"
-                  >
-                    Add Property
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/manage-property"
-                    className="text-white text-decoration-none"
-                  >
-                    Manage Property
-                  </Link>
-                </li>
+                {
+                  isAuthenticated === "admin" && (
+                    <li>
+                      <Link
+                        to="/add-property"
+                        className="text-white text-decoration-none"
+                      >
+                        Add Property
+                      </Link>
+                    </li>
+                  )
+                }
+                {
+                  isAuthenticated === "admin" && (
+                    <li>
+                      <Link
+                        to="/manage-property"
+                        className="text-white text-decoration-none"
+                      >
+                        Manage Property
+                      </Link>
+                    </li>
+                  )
+                }
                 <li>
                   <Link to="/list-properties" className="text-white text-decoration-none">
                     List Properties
-                  </Link>
-                </li>
-                <li>
-                  <Link to="" className="text-white text-decoration-none">
-                    Settings
                   </Link>
                 </li>
                 <li>
@@ -198,7 +230,7 @@ function ListProperty() {
                           <img
                             src={require(`../../images/${property.image[0]}`)}
                             alt=""
-                            className="img-fluid hover-image"
+                            className="hover-image my-img"
                           />
                         )}
                         <h5>{property?.title}</h5>

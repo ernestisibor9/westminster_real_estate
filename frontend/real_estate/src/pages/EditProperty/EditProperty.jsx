@@ -8,8 +8,11 @@ import "./EditProperty.css";
 // import { assets } from "../../assets/asset";
 
 function EditProperty() {
-    const {id} = useParams()
-    console.log(id);
+  const [isAuthenticated, setIsAuthenticated] = useState();
+
+  const {id} = useParams()
+  console.log(id);
+
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [price, setPrice] = useState();
@@ -58,6 +61,7 @@ function EditProperty() {
       );
       if (response.data.success) {
         setAdmin(response.data.user._id);
+        setIsAuthenticated(response.data.user.role);
       } else {
         toast.error("Invalid authorization");
       }
@@ -160,8 +164,8 @@ function EditProperty() {
         <div className="row">
           <div className="col-md-2 bg-primary sidebar">
             <div>
-              <ul>
-              <li>
+            <ul>
+                <li>
                   <Link
                     to="/dashboard"
                     className="text-white text-decoration-none"
@@ -169,30 +173,33 @@ function EditProperty() {
                     Dashboard
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/add-property"
-                    className="text-white text-decoration-none"
-                  >
-                    Add Property
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/manage-property"
-                    className="text-white text-decoration-none"
-                  >
-                    Manage Property
-                  </Link>
-                </li>
+                {
+                  isAuthenticated === "admin" && (
+                    <li>
+                      <Link
+                        to="/add-property"
+                        className="text-white text-decoration-none"
+                      >
+                        Add Property
+                      </Link>
+                    </li>
+                  )
+                }
+                {
+                  isAuthenticated === "admin" && (
+                    <li>
+                      <Link
+                        to="/manage-property"
+                        className="text-white text-decoration-none"
+                      >
+                        Manage Property
+                      </Link>
+                    </li>
+                  )
+                }
                 <li>
                   <Link to="/list-properties" className="text-white text-decoration-none">
                     List Properties
-                  </Link>
-                </li>
-                <li>
-                  <Link to="" className="text-white text-decoration-none">
-                    Settings
                   </Link>
                 </li>
                 <li>

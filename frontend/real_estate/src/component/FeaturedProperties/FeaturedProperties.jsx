@@ -36,7 +36,7 @@ function FeaturedProperties() {
                       <img
                         src={require(`../../images/${property.image[0]}`)}
                         alt=""
-                        className="img-fluid hover-image"
+                        className="my-img hover-image"
                       />
                     )}
                     {/* <img src={require(`../../images/${property.image}`)} alt="" className="img-fluid hover-image" /> */}

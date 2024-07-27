@@ -126,7 +126,7 @@ useEffect(() => {
                         <img
                           src={require(`../../images/${property.image[0]}`)}
                           alt=""
-                          className="img-fluid hover-image"
+                          className="my-img hover-image"
                         />
                       )}
                       <h5>{property?.title}</h5>

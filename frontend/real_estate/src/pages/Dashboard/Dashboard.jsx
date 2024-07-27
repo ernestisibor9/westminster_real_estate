@@ -8,6 +8,7 @@ import { assets } from "../../assets/asset";
 
 function Dashboard() {
   const [userInfo, setUserInfo] = useState();
+  const [isAuthenticated, setIsAuthenticated] = useState();
 
   const getPersonData = async () => {
     try {
@@ -22,7 +23,8 @@ function Dashboard() {
       );
       if (response.data.success) {
         setUserInfo(response.data.user);
-        console.log(userInfo);
+        setIsAuthenticated(response.data.user.role);
+        // console.log(userInfo);
       } else {
         toast.error("Invalid authorization");
       }
@@ -64,22 +66,30 @@ function Dashboard() {
                     Dashboard
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/add-property"
-                    className="text-white text-decoration-none"
-                  >
-                    Add Property
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/manage-property"
-                    className="text-white text-decoration-none"
-                  >
-                    Manage Property
-                  </Link>
-                </li>
+                {
+                  isAuthenticated === "admin" && (
+                    <li>
+                      <Link
+                        to="/add-property"
+                        className="text-white text-decoration-none"
+                      >
+                        Add Property
+                      </Link>
+                    </li>
+                  )
+                }
+                {
+                  isAuthenticated === "admin" && (
+                    <li>
+                      <Link
+                        to="/manage-property"
+                        className="text-white text-decoration-none"
+                      >
+                        Manage Property
+                      </Link>
+                    </li>
+                  )
+                }
                 <li>
                   <Link to="/list-properties" className="text-white text-decoration-none">
                     List Properties

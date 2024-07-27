@@ -10,6 +10,8 @@ import "./ManageProperty.css";
 // import { assets } from "../../assets/asset";
 
 function ManageProperty() {
+  const [isAuthenticated, setIsAuthenticated] = useState();
+
   const [userInfo, setUserInfo] = useState();
   const [allProperties, setAllProperties] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
@@ -27,6 +29,7 @@ function ManageProperty() {
       );
       if (response.data.success) {
         setUserInfo(response.data.user);
+        setIsAuthenticated(response.data.user.role);
         console.log(userInfo);
       } else {
         toast.error("Invalid authorization");
@@ -97,7 +100,7 @@ function ManageProperty() {
         <div className="row">
           <div className="col-md-2 bg-primary sidebar">
             <div>
-              <ul>
+            <ul>
                 <li>
                   <Link
                     to="/dashboard"
@@ -106,27 +109,33 @@ function ManageProperty() {
                     Dashboard
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/add-property"
-                    className="text-white text-decoration-none"
-                  >
-                    Add Property
-                  </Link>
-                </li>
-                <li>
-                  <Link to="" className="text-white text-decoration-none">
-                    Manage Property
-                  </Link>
-                </li>
+                {
+                  isAuthenticated === "admin" && (
+                    <li>
+                      <Link
+                        to="/add-property"
+                        className="text-white text-decoration-none"
+                      >
+                        Add Property
+                      </Link>
+                    </li>
+                  )
+                }
+                {
+                  isAuthenticated === "admin" && (
+                    <li>
+                      <Link
+                        to="/manage-property"
+                        className="text-white text-decoration-none"
+                      >
+                        Manage Property
+                      </Link>
+                    </li>
+                  )
+                }
                 <li>
                   <Link to="/list-properties" className="text-white text-decoration-none">
                     List Properties
-                  </Link>
-                </li>
-                <li>
-                  <Link to="" className="text-white text-decoration-none">
-                    Settings
                   </Link>
                 </li>
                 <li>
