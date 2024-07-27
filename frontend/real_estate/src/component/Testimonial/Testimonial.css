@@ -1,0 +1,31 @@
+.testimonial-section {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+.testimonial {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.testimonial img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+.testimonial h5 {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.testimonial p {
+    margin-bottom: 10px;
+    font-style: italic;
+    color: #6c757d;
+}
+.testimonial .stars {
+    color: #ffc107;
+}

@@ -3,6 +3,7 @@ import Hero from '../../component/Hero/Hero'
 import WhoWeAre from '../../component/WhoWeAre/WhoWeAre'
 import FeaturedProperties from '../../component/FeaturedProperties/FeaturedProperties'
 import Navbar from '../../component/Navbar/Navbar'
+import Testimonial from '../../component/Testimonial/Testimonial'
 
 function Home() {
   return (
@@ -11,6 +12,7 @@ function Home() {
         <Hero/>
         <WhoWeAre/>
         <FeaturedProperties/>
+        <Testimonial/>
     </div>
   )
 }

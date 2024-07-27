@@ -13,7 +13,7 @@ function ListProperties() {
 
   // Search properties
   const [query, setQuery] = useState("");
-  const [properties, setProperties] = useState([]);
+  // const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 

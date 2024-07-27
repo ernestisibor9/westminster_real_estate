@@ -15,6 +15,7 @@ import ViewSingleProperty from './pages/ViewSingleProperty/ViewSingleProperty'
 import EditProperty from './pages/EditProperty/EditProperty'
 import ListProperties from './pages/ListProperties/ListProperties'
 import ListProperty from './pages/ListProperty/ListProperty'
+import Footer from './component/Footer/Footer'
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="view-single-property/:id" element={<ViewSingleProperty/>} />
         <Route path="edit-property/:id" element={<EditProperty/>} />
       </Routes>
+      <Footer/>
       <ToastContainer theme='colored'/>
     </div>
   )
