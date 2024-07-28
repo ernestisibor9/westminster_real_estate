@@ -175,34 +175,51 @@ const updateProperty = async (req, res) => {
 };
 
 // Delete property
-const deleteProperty = async (req, res) => {
-  try {
-    const { image } = req.body;
-    const findProperty = await Property.findById(req.params.id);
-    if (!findProperty) {
-      return res.status(403).json({ message: "Invalid Property id" });
-    }
-    // Remove images from the product's images array
-    findProperty.image = findProperty.image.filter(
-      (image) => !image.includes(image)
-    );
+// const deleteProperty = async (req, res) => {
+//   try {
+//     const { image } = req.body;
+//     const findProperty = await Property.findById(req.params.id);
+//     if (!findProperty) {
+//       return res.status(403).json({ message: "Invalid Property id" });
+//     }
+//     // Remove images from the product's images array
+//     findProperty.image = findProperty.image.filter(
+//       (image) => !image.includes(image)
+//     );
 
-    await findProperty.save();
-    if (findProperty.admin.toString() !== req.body.userId.toString()) {
-      throw new Error(
-        "You are not allowed to delete other people's properties"
-      );
-    } else {
-      await Property.findByIdAndDelete(req.params.id);
-      res.status(200).json({
-        success: true,
-        message: "Property deleted successfully",
-      });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+//     await findProperty.save();
+//     if (findProperty.admin.toString() !== req.body.userId.toString()) {
+//       throw new Error(
+//         "You are not allowed to delete other people's properties"
+//       );
+//     } else {
+//       await Property.findByIdAndDelete(req.params.id);
+//       res.status(200).json({
+//         success: true,
+//         message: "Property deleted successfully",
+//       });
+//     }
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
+    // Delete Product
+    const deleteProperty  = async (req, res) => {
+      const id = req.params.id;
+      try {
+        const property = await Property.findByIdAndDelete(id);
+        if (!property) {
+          throw new Error("Property not found");
+        }
+        res.status(200).json({
+          success: true,
+          message: "Property deleted successfully",
+        });
+      } catch (error) {
+          return res.status(500).json({ message: error.message });
+      }
+    };
 
 // Featured
 const featuredStatus = async (req, res) => {

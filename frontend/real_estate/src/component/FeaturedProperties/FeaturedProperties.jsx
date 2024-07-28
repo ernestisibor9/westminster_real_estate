@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function FeaturedProperties() {
+
   const [featuredProperties, setFeaturedProperties] = useState([]);
   console.log(featuredProperties);
 
@@ -31,7 +32,7 @@ function FeaturedProperties() {
             <div className="col-md-4 mt-3">
               <div className="card shadow">
                 <div className="card-body">
-                  <Link to="" className="feat-style">
+                  <Link to={`/property-details/${property._id}`} className="feat-style">
                     {property.image.length > 0 && (
                       <img
                         src={require(`../../images/${property.image[0]}`)}

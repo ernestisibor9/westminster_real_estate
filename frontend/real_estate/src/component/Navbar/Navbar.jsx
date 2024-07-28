@@ -84,7 +84,7 @@ function Navbar() {
                 </Link>
               </li>
               <li class="nav-item">
-                <Link to='#' class="nav-link">
+                <Link to='/services' class="nav-link">
                   Services
                 </Link>
               </li>
@@ -94,7 +94,7 @@ function Navbar() {
                 </Link>
               </li>
               <li class="nav-item">
-                <Link to = '#' class="nav-link">
+                <Link to = '/contact' class="nav-link">
                   Contact
                 </Link>
               </li>

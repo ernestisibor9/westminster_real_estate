@@ -8,7 +8,7 @@ function Footer() {
   return (
     <div>
       <footer
-        class=" text-center text-lg-start mt-5"
+        class=" text-center text-lg-start"
         style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
       >
         <div class="container p-4 mt-5">
@@ -88,7 +88,7 @@ function Footer() {
           class="text-center text-white p-3"
           style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
         >
-          Copyright © 2024, All rights reserved
+          Copyright © 2024. All rights reserved
           <a class="text-white text-white" href="https://yourcompany.com/"></a>
         </div>
       </footer>
