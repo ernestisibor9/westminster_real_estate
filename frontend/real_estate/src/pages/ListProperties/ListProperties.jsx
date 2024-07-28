@@ -7,9 +7,12 @@ import { FaSearch } from "react-icons/fa";
 
 function ListProperties() {
   const [featuredProperties, setFeaturedProperties] = useState([]);
-  const [propertyFor, setPropertyFor] = useState('');
+  const [propertyFor, setPropertyFor] = useState("");
+  const [propertyTypes, setPropertyTypes] = useState("");
 
-  const categories = ["buy", "rent", "lease"]; 
+  const categories = ["buy", "rent", "lease"];
+
+  const categoryTypes = ["building", "flat", "land"];
 
   // Search properties
   const [query, setQuery] = useState("");
@@ -19,49 +22,82 @@ function ListProperties() {
 
   const handleSearch = async (query) => {
     if (!query) {
-        setFeaturedProperties([]);
-        setLoading(false);
-        return;
-    }
-    setLoading(true);
-    setError('');
-    try {
-        const response = await axios.post("http://localhost:5000/api/property/search-by-location", { query });
-        setFeaturedProperties(response.data);
-    } catch (err) {
-        setError('No such property');
-        console.error(err);
-    }
-    setLoading(false);
-};
-
-useEffect(() => {
-    handleSearch(query);
-}, [query]);
-
-
-// Property for
-const handleFilter = async (propertyFor) => {
-  if (!propertyFor) {
       setFeaturedProperties([]);
       setLoading(false);
       return;
+    }
+    setLoading(true);
+    setError("");
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/property/search-by-location",
+        { query }
+      );
+      setFeaturedProperties(response.data);
+    } catch (err) {
+      setError("No such property");
+      console.error(err);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    handleSearch(query);
+  }, [query]);
+
+  // Property for
+  const handleFilter = async (propertyFor) => {
+    if (!propertyFor) {
+      setFeaturedProperties([]);
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    setError("");
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/property/search-for",
+        { propertyFor }
+      );
+      setFeaturedProperties(response.data);
+    } catch (err) {
+      setError("No such property");
+      console.error(err);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    handleFilter(propertyFor);
+  }, [propertyFor]);
+
+
+// Property types
+const handleFilterTypes = async (propertyTypes) => {
+  if (!propertyTypes) {
+    setFeaturedProperties([]);
+    setLoading(false);
+    return;
   }
   setLoading(true);
-  setError('');
+  setError("");
   try {
-      const response = await axios.post('http://localhost:5000/api/property/search-for', { propertyFor });
-      setFeaturedProperties(response.data);
+    const response = await axios.post(
+      "http://localhost:5000/api/property/search-types",
+      { propertyTypes }
+    );
+    setFeaturedProperties(response.data);
   } catch (err) {
-      setError('No such property');
-      console.error(err);
+    setError("No such property");
+    console.error(err);
   }
   setLoading(false);
 };
 
 useEffect(() => {
-  handleFilter(propertyFor);
-}, [propertyFor]);
+  handleFilterTypes(propertyTypes);
+}, [propertyTypes]);
+
 
   // Get All Featured Poperties
   const getAllFeaturedProperties = async () => {
@@ -98,23 +134,48 @@ useEffect(() => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
-              <FaSearch class="search-icon"/>
+              <FaSearch class="search-icon" />
               <div className="">
+                <form action="">
+                  <select
+                    class="form-select sel"
+                    value={propertyFor}
+                    onChange={(e) => setPropertyFor(e.target.value)}
+                  >
+                    <option selected>
+                      Search by transaction
+                    </option>
+                    {categories.map((cat) => (
+                      <option key={cat} value={cat}>
+                        Search to {cat}
+                      </option>
+                    ))}
+                  </select>
+                </form>
+              </div>
+              <div>
               <form action="">
-              <select class="form-select sel" value={propertyFor} onChange={(e) => setPropertyFor(e.target.value)}>
-  <option selected disabled>Search to</option>
-  {categories.map(cat => (
-                    <option key={cat} value={cat}>Search to {cat}</option>
-                ))}
-</select>
-
-              </form>
+                  <select
+                    class="form-select sel"
+                    value={propertyTypes}
+                    onChange={(e) => setPropertyTypes(e.target.value)}
+                  >
+                    <option selected >
+                      Search by types
+                    </option>
+                    {categoryTypes.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                </form>
               </div>
             </div>
           </div>
           <div className="mt-3 text-danger fw-bold">
-          {loading && <p>Loading...</p>}
-          {error && <p>{error}</p>}
+            {loading && <p>Loading...</p>}
+            {error && <p>{error}</p>}
           </div>
           {limitFeatured.map((property) => {
             return (
@@ -129,9 +190,10 @@ useEffect(() => {
                           className="my-img hover-image"
                         />
                       )}
-                      <h5>{property?.title}</h5>
-                      <p>{property?.description}</p>
-                      <h6>Location: {property?.location}</h6>
+                      <h6 className="text-center pt-3">Title: {property?.title}</h6>
+                      <p className="text-center">Transation: {property?.propertyFor}</p>
+                      <p className="text-center">Type: {property?.propertyTypes}</p>
+                      <p className="text-center">Location: {property?.location}</p>
                     </Link>
                   </div>
                 </div>

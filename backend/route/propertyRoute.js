@@ -14,6 +14,7 @@ const {
   updateMultipleImages,
   existingProperties,
   propertiesFor,
+  propertyTypes,
 } = require("../controller/propertyController");
 const authMiddleware = require("../middleware/authMiddleware");
 const route = express.Router();
@@ -44,6 +45,7 @@ route.get("/featured-properties", featuredProperties);
 route.put("/featured-property/status/:id", featuredStatus);
 route.get("/count-available-properties", countAvailableProperties);
 route.post("/search-for", propertiesFor);
+route.post("/search-types", propertyTypes);
 route.post("/search-by-location", existingProperties);
 route.put(
   "/update-multiple-images/:id",

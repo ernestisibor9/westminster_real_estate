@@ -315,6 +315,26 @@ const propertiesFor = async(req, res)=>{
 }
 
 
+// Search for property types to building, flat, land
+const propertyTypes = async(req, res)=>{
+  const { propertyTypes } = req.body;
+    if (!propertyTypes) {
+        return res.status(400).json({ message: "propertyType is required" });
+    }
+
+    try {
+        const properties = await Property.find({ propertyTypes });
+        if (properties.length === 0) {
+            return res.status(404).json({ message: "No properties found " });
+        }
+        res.json(properties);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "An error occurred while fetching properties" });
+    }
+}
+
+
 module.exports = {
   getAllProperties,
   createProperty,
@@ -330,4 +350,5 @@ module.exports = {
   deleteProperty,
   existingProperties,
   propertiesFor,
+  propertyTypes,
 };

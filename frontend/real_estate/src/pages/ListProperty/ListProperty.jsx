@@ -10,6 +10,9 @@ function ListProperty() {
 
   const [featuredProperties, setFeaturedProperties] = useState([]);
   const [propertyFor, setPropertyFor] = useState("");
+  const [propertyTypes, setPropertyTypes] = useState("");
+
+  const categoryTypes = ["building", "flat", "land"];
 
   const categories = ["buy", "rent", "lease"];
 
@@ -28,10 +31,8 @@ function ListProperty() {
         setIsAuthenticated(response.data.user.role);
         // console.log(userInfo);
       } else {
-        
       }
     } catch (error) {
-     
       console.log(error);
     }
   };
@@ -97,6 +98,32 @@ function ListProperty() {
     handleFilter(propertyFor);
   }, [propertyFor]);
 
+  // Property types
+  const handleFilterTypes = async (propertyTypes) => {
+    if (!propertyTypes) {
+      setFeaturedProperties([]);
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    setError("");
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/property/search-types",
+        { propertyTypes }
+      );
+      setFeaturedProperties(response.data);
+    } catch (err) {
+      setError("No such property");
+      console.error(err);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    handleFilterTypes(propertyTypes);
+  }, [propertyTypes]);
+
   // Get All Featured Poperties
   const getAllFeaturedProperties = async () => {
     const response = await axios.get(
@@ -130,7 +157,7 @@ function ListProperty() {
         <div className="row">
           <div className="col-md-2 bg-primary sidebar">
             <div>
-            <ul>
+              <ul>
                 <li>
                   <Link
                     to="/dashboard"
@@ -139,32 +166,31 @@ function ListProperty() {
                     Dashboard
                   </Link>
                 </li>
-                {
-                  isAuthenticated === "admin" && (
-                    <li>
-                      <Link
-                        to="/add-property"
-                        className="text-white text-decoration-none"
-                      >
-                        Add Property
-                      </Link>
-                    </li>
-                  )
-                }
-                {
-                  isAuthenticated === "admin" && (
-                    <li>
-                      <Link
-                        to="/manage-property"
-                        className="text-white text-decoration-none"
-                      >
-                        Manage Property
-                      </Link>
-                    </li>
-                  )
-                }
+                {isAuthenticated === "admin" && (
+                  <li>
+                    <Link
+                      to="/add-property"
+                      className="text-white text-decoration-none"
+                    >
+                      Add Property
+                    </Link>
+                  </li>
+                )}
+                {isAuthenticated === "admin" && (
+                  <li>
+                    <Link
+                      to="/manage-property"
+                      className="text-white text-decoration-none"
+                    >
+                      Manage Property
+                    </Link>
+                  </li>
+                )}
                 <li>
-                  <Link to="/list-properties" className="text-white text-decoration-none">
+                  <Link
+                    to="/list-properties"
+                    className="text-white text-decoration-none"
+                  >
                     List Properties
                   </Link>
                 </li>
@@ -213,6 +239,22 @@ function ListProperty() {
                   </form>
                 </div>
               </div>
+              <div>
+                <form action="">
+                  <select
+                    class="form-select sel"
+                    value={propertyTypes}
+                    onChange={(e) => setPropertyTypes(e.target.value)}
+                  >
+                    <option selected>Search by types</option>
+                    {categoryTypes.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                </form>
+              </div>
             </div>
             <div className="mt-3 text-danger fw-bold">
               {loading && <p className="text-success">Loading...</p>}
@@ -220,30 +262,38 @@ function ListProperty() {
             </div>
             {/*  */}
             <div className="row justify-content-center">
-            {limitFeatured.map((property) => {
-              return (
-                <div className="col-md-4 mt-3">
-                  <div className="card shadow">
-                    <div className="card-body">
-                      <Link to="" className="feat-style">
-                        {property.image.length > 0 && (
-                          <img
-                            src={require(`../../images/${property.image[0]}`)}
-                            alt=""
-                            className="hover-image my-img"
-                          />
-                        )}
-                        <h5>{property?.title}</h5>
-                        <p>{property?.description}</p>
-                        <h6>Location: {property?.location}</h6>
-                      </Link>
+              {limitFeatured.map((property) => {
+                return (
+                  <div className="col-md-4 mt-3">
+                    <div className="card shadow">
+                      <div className="card-body">
+                        <Link to="" className="feat-style">
+                          {property.image.length > 0 && (
+                            <img
+                              src={require(`../../images/${property.image[0]}`)}
+                              alt=""
+                              className="hover-image my-img"
+                            />
+                          )}
+                          <h6 className="text-center pt-3">
+                            Title: {property?.title}
+                          </h6>
+                          <p className="text-center">
+                            Transation: {property?.propertyFor}
+                          </p>
+                          <p className="text-center">
+                            Type: {property?.propertyTypes}
+                          </p>
+                          <p className="text-center">
+                            Location: {property?.location}
+                          </p>
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
             </div>
-            
           </div>
           <div className="col-md-1"></div>
         </div>
