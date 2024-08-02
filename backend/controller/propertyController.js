@@ -204,22 +204,22 @@ const updateProperty = async (req, res) => {
 //   }
 // };
 
-    // Delete Product
-    const deleteProperty  = async (req, res) => {
-      const id = req.params.id;
-      try {
-        const property = await Property.findByIdAndDelete(id);
-        if (!property) {
-          throw new Error("Property not found");
-        }
-        res.status(200).json({
-          success: true,
-          message: "Property deleted successfully",
-        });
-      } catch (error) {
-          return res.status(500).json({ message: error.message });
-      }
-    };
+// Delete Product
+const deleteProperty = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const property = await Property.findByIdAndDelete(id);
+    if (!property) {
+      throw new Error("Property not found");
+    }
+    res.status(200).json({
+      success: true,
+      message: "Property deleted successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 // Featured
 const featuredStatus = async (req, res) => {
@@ -253,7 +253,7 @@ const updateMultipleImages = async (req, res) => {
       // Append new image URLs to existing ones
       // image: req.files.map((file) => `${file.filename}`),
       image: req.body.image
-       ? req.body.image
+        ? req.body.image
         : req.files.map((file) => `${file.filename}`), // Existing photos should be an array of image filenames
     };
     // ? req.files.map(file => file.path) : req.body.existingPhotos,
@@ -278,61 +278,147 @@ const updateMultipleImages = async (req, res) => {
 const existingProperties = async (req, res) => {
   const query = req.body.query;
   if (!query) {
-      return res.status(400).json({ message: "Query is required" });
+    return res.status(400).json({ message: "Query is required" });
   }
 
   try {
-      // Search properties based on the location query
-      const properties = await Property.find({ location: new RegExp(query, 'i') });
-      console.log(properties);
-      if (properties.length === 0) {
-          return res.status(404).json({ message: "No properties found for the given location" });
-      }
-      res.json(properties);
+    // Search properties based on the location query
+    const properties = await Property.find({
+      location: new RegExp(query, "i"),
+    });
+    console.log(properties);
+    if (properties.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No properties found for the given location" });
+    }
+    res.json(properties);
   } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "An error occurred while searching for properties" });
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "An error occurred while searching for properties" });
   }
 };
 
 // Search for properties to buy, rent and lease
-const propertiesFor = async(req, res)=>{
+const propertiesFor = async (req, res) => {
   const { propertyFor } = req.body;
-    if (!propertyFor) {
-        return res.status(400).json({ message: "propertyFor is required" });
-    }
+  if (!propertyFor) {
+    return res.status(400).json({ message: "propertyFor is required" });
+  }
 
-    try {
-        const properties = await Property.find({ propertyFor });
-        if (properties.length === 0) {
-            return res.status(404).json({ message: "No properties found " });
-        }
-        res.json(properties);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "An error occurred while fetching properties" });
+  try {
+    const properties = await Property.find({ propertyFor });
+    if (properties.length === 0) {
+      return res.status(404).json({ message: "No properties found " });
     }
-}
-
+    res.json(properties);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "An error occurred while fetching properties" });
+  }
+};
 
 // Search for property types to building, flat, land
-const propertyTypes = async(req, res)=>{
+const propertyTypes = async (req, res) => {
   const { propertyTypes } = req.body;
-    if (!propertyTypes) {
-        return res.status(400).json({ message: "propertyType is required" });
-    }
+  if (!propertyTypes) {
+    return res.status(400).json({ message: "propertyType is required" });
+  }
 
-    try {
-        const properties = await Property.find({ propertyTypes });
-        if (properties.length === 0) {
-            return res.status(404).json({ message: "No properties found " });
-        }
-        res.json(properties);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "An error occurred while fetching properties" });
+  try {
+    const properties = await Property.find({ propertyTypes });
+    if (properties.length === 0) {
+      return res.status(404).json({ message: "No properties found " });
     }
+    res.json(properties);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "An error occurred while fetching properties" });
+  }
+};
+
+// Location
+
+const allLocation = async (req, res) => {
+  try {
+    // Select only the location field
+    const locations = await Property.distinct("location");
+    // const locations = await Property.find({}, "location");
+    res.status(200).json({
+      success: true,
+      locations: locations
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+// Fetch Search Products
+const fetchSearchProperties = async (req, res) => {
+  try {
+    const { location, propertyTypes, price } = req.body;
+
+    // Build query object
+    const query = { propertyFor: 'buy' };
+    if (location) query.location = location;
+    if (propertyTypes) query.type = propertyTypes;
+    if (price) query.price = price;
+
+    // Fetch filtered properties
+    const properties = await Property.find(query);
+    res.status(200).json({
+        success: true,
+        properties:properties
+    });
+} catch (err) {
+    res.status(500).json({ message: err.message });
 }
+};
+
+// Get all properties based on buy
+const getPropertiesByBuy = async(req, res) => {
+  try {
+    const properties = await Property.find({ propertyFor: 'buy' });
+    res.status(200).json({
+      success: true,
+      properties: properties,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Search for properties to buy based on the location
+const getPropertyLocationBuy = async (req, res) => {
+  try {
+    const { location } = req.body;
+
+    // Build query object
+    const query = { propertyFor: 'buy' };
+    if (location) query.location = location;
+
+    // Fetch filtered properties
+    const properties = await Property.find(query);
+    res.status(200).json({
+        success: true,
+        properties:properties
+    });
+} catch (err) {
+    res.status(500).json({ message: err.message });
+}
+};
+
+
+
+
+
 
 
 module.exports = {
@@ -351,4 +437,8 @@ module.exports = {
   existingProperties,
   propertiesFor,
   propertyTypes,
+  allLocation,
+  fetchSearchProperties,
+  getPropertiesByBuy,
+  getPropertyLocationBuy
 };

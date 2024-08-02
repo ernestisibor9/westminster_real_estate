@@ -144,12 +144,12 @@ function Navbar() {
                 </Link>
               </li>
               <li class="nav-item">
-                <Link to="/buy" class="nav-link">
+                <Link to="/buy-property" class="nav-link">
                   Buy
                 </Link>
               </li>
               <li class="nav-item">
-                <Link to="/services" class="nav-link">
+                <Link to="" class="nav-link">
                   Rent
                 </Link>
               </li>

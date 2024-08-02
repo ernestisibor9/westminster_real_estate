@@ -29,7 +29,7 @@ function PropertyDetails() {
       {/* <Navbar /> */}
       <div className="dashboard-bg">
         <div className="dashboard-head">
-          <h1>About Us</h1>
+          <h1>Property Details</h1>
         </div>
       </div>
       <div className="container mt-5">

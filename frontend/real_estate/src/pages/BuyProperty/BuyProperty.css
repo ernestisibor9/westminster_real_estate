@@ -1,0 +1,6 @@
+.property-text h6, p{
+    text-decoration: none !important;
+    font-weight: bold;
+    font-family: "helvetica";
+    text-align: justify;
+}

@@ -15,6 +15,10 @@ const {
   existingProperties,
   propertiesFor,
   propertyTypes,
+  allLocation,
+  fetchSearchProperties,
+  getPropertiesByBuy,
+  getPropertyLocationBuy,
 } = require("../controller/propertyController");
 const authMiddleware = require("../middleware/authMiddleware");
 const route = express.Router();
@@ -35,9 +39,13 @@ const upload = multer({ storage: storage });
 
 // All the routes for properties
 route.get("/get-all-properties", getAllProperties);
+route.get("/get-property-buy", getPropertiesByBuy)
+route.post("/get-property-location-buy", getPropertyLocationBuy)
+route.post('/fetch-buy-property', fetchSearchProperties)
 route.get("/count-all-properties", countProperty);
 route.get("/get-single-property/:id", getSingleProperty);
 route.get("/get-one-property/:id", getOneProperty);
+route.get("/all-location", allLocation);
 route.put("/update-property/:id", authMiddleware, updateProperty);
 route.delete("/delete-property/:id", authMiddleware, deleteProperty);
 route.get("/available-properties", availableProperties);
