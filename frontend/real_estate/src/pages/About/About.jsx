@@ -1,12 +1,12 @@
 import React from "react";
-import Navbar from "../../component/Navbar/Navbar";
+// import Navbar from "../../component/Navbar/Navbar";
 import "./About.css";
 import { assets } from "../../assets/asset";
 
 function About() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="dashboard-bg">
         <div className="dashboard-head">
           <h1>About Us</h1>

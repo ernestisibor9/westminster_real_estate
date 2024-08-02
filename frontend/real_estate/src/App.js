@@ -20,12 +20,26 @@ import Services from './pages/Services/Services'
 import Contact from './pages/Contact/Contact'
 import PropertyDetails from './pages/PropertyDetails/PropertyDetails'
 import EmailConfirm from './component/EmailConfirm/EmailConfirm'
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+import { useEffect } from 'react'
+import Navbar from './component/Navbar/Navbar'
+import Search from './component/Search/Search'
+import SearchProperty from './component/SearchProperty/SearchProperty'
+import Buy from './pages/Buy/Buy'
 
 
 function App() {
-
+  useEffect(() => {
+    AOS.init({
+      duration: 1200, // You can customize the duration
+    });
+  }, []);
   return (
     <div>
+      <Navbar/>
+      <Search/>
+      <SearchProperty/>
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="about" element={<About/>} />
@@ -38,6 +52,7 @@ function App() {
         <Route path="list-properties" element={<ProtectedRoutes><ListProperty/></ProtectedRoutes>} />
         <Route path="contact" element={<Contact/>} />
         <Route path="services" element={<Services/>} />
+        <Route path="buy" element={<Buy/>} />
         <Route path="/email-confirmed" element={<EmailConfirm/>} />
         <Route path="property-details/:id" element={<PropertyDetails/>} />
         <Route path="view-single-property/:id" element={<ProtectedRoutes><ViewSingleProperty/></ProtectedRoutes>} />

@@ -89,7 +89,7 @@ function Footer() {
           style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
         >
           Copyright © 2024. All rights reserved
-          <a class="text-white text-white" href="https://yourcompany.com/"></a>
+          <Link to='/' class="text-white text-white" ></Link>
         </div>
       </footer>
     </div>

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {useParams } from "react-router-dom";
 import "./PropertyDetails.css";
-import Navbar from "../../component/Navbar/Navbar";
+// import Navbar from "../../component/Navbar/Navbar";
 
 
 function PropertyDetails() {
@@ -26,7 +26,7 @@ function PropertyDetails() {
   });
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="dashboard-bg">
         <div className="dashboard-head">
           <h1>About Us</h1>

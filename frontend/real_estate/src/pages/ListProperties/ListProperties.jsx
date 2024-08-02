@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Navbar from "../../component/Navbar/Navbar";
+// import Navbar from "../../component/Navbar/Navbar";
 import "./ListProperties.css";
 import { FaSearch } from "react-icons/fa";
 
@@ -114,7 +114,7 @@ useEffect(() => {
   let limitFeatured = featuredProperties.slice(0, 12);
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="dashboard-bg">
         <div className="dashboard-head">
           <h1>Properties</h1>

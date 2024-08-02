@@ -98,7 +98,6 @@ function AddProperty() {
             },
           }
         );
-        console.log(response.data.property);
         if (response.data.success) {
           toast.success(response.data.message);
           // setUploadedImg(true);

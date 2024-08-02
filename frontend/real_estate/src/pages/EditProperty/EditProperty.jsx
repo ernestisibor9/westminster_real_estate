@@ -45,7 +45,7 @@ function EditProperty() {
 
     useEffect(()=>{
         getOneProperty()
-    },[])
+    })
 
   // Get users details
   const getPersonData = async () => {
