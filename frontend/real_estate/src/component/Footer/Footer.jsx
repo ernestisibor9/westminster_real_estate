@@ -14,13 +14,14 @@ function Footer() {
         <div class="container p-4 mt-5">
           <div class="row">
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-              <h5 class="text-uppercase text-white">WebMinster Real Estate</h5>
-              <p className="text-white">
+              <h6 class="text-uppercase text-white">WebMinster Real Estate</h6>
+              <small className="text-white">
                 Our team of experienced real estate professionals is dedicated
                 to delivering exceptional results. Whether you are buying,
                 selling, or renting, we are here to guide you every step of the
                 way.
-              </p>
+              </small>
+              <hr className="mb-3" style={{color:'white'}}/>
               <div className="d-flex">
                 <Link to = '' className="text-white fa"><FaFacebook /></Link>
                 <Link to = '' className="text-white fa"><FaTwitter /></Link>
@@ -30,54 +31,54 @@ function Footer() {
               </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase text-white">Real Estate</h5>
+              <h6 class="text-uppercase text-white">Real Estate</h6>
 
               <ul class="list-unstyled mb-0">
                 <li>
                   <a href="#!" class="text-white my-list">
-                    Home
+                    <p style={{fontSize:'14px'}}>Home</p>
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white my-list">
-                    About
+                  <p style={{fontSize:'14px'}}>About</p>
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white my-list">
-                    Service
+                  <p style={{fontSize:'14px'}}>Services</p>
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white my-list">
-                    Properties
+                  <p style={{fontSize:'14px'}}>Properties</p>
                   </a>
                 </li>
               </ul>
             </div>
 
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase mb-0 text-white">Contact</h5>
+              <h6 class="text-uppercase mb-0 text-white">Contact</h6>
 
               <ul class="list-unstyled">
                 <li>
                   <a href="#!" class="text-white my-list">
-                    <FaHome /> &nbsp; London, UK
+                    <FaHome /> &nbsp; <span style={{fontSize:'14px'}}>London, UK</span>
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white my-list">
-                    <IoMdMail /> &nbsp; info@realestate.com
+                    <IoMdMail /> &nbsp; <span style={{fontSize:'14px'}}>info@realestate.com</span>
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white my-list">
-                    <FaPhoneAlt /> &nbsp; +44 2638 097
+                    <FaPhoneAlt /> &nbsp; <span style={{fontSize:'14px'}}>+44 9340 2729 01</span>
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white my-list">
-                    <FaPrint /> &nbsp; + 01 234 567 89
+                    <FaPrint /> &nbsp; <span style={{fontSize:'14px'}}>+ 01 2342 8567 89 </span>
                   </a>
                 </li>
               </ul>
@@ -88,8 +89,8 @@ function Footer() {
           class="text-center text-white p-3"
           style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
         >
-          Copyright © 2024. All rights reserved
-          <Link to='/' class="text-white text-white" ></Link>
+          <span style={{fontSize:'14px'}}>Copyright © 2024. All rights reserved</span>
+
         </div>
       </footer>
     </div>

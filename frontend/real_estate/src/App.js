@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, matchPath } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Register from "./pages/Register/Register";
@@ -27,6 +27,8 @@ import Search from "./component/Search/Search";
 import SearchProperty from "./component/SearchProperty/SearchProperty";
 import Buy from "./pages/Buy/Buy";
 import BuyProperty from "./pages/BuyProperty/BuyProperty";
+import RentProperty from "./pages/RentProperty/RentProperty";
+import LeaseProperty from "./pages/LeaseProperty/LeaseProperty";
 
 function App() {
   useEffect(() => {
@@ -47,17 +49,18 @@ function App() {
     "/manage-property",
     "/view-single-property/:id",
     "/edit-property/:id",
-    "property-details/:id",
+    "/property-details/:id",
   ];
+
+  const matchesNoNavbarRoute = (path) => {
+    return noNavbarRoutes.some(route => matchPath({ path: route, exact: true }, path));
+  };
 
   return (
     <div>
-      {!noNavbarRoutes.includes(location.pathname) && <Navbar />}
-      {!noNavbarRoutes.includes(location.pathname) && <Search />}
-      {!noNavbarRoutes.includes(location.pathname) && <SearchProperty />}
-      {/* <Navbar/>
-      <Search/>
-      <SearchProperty/> */}
+      {!matchesNoNavbarRoute(location.pathname) && <Navbar />}
+      {!matchesNoNavbarRoute(location.pathname) && <Search />}
+      {!matchesNoNavbarRoute(location.pathname) && <SearchProperty />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
@@ -112,6 +115,8 @@ function App() {
         />
         <Route path="contact" element={<Contact />} />
         <Route path="buy-property" element={<BuyProperty />} />
+        <Route path="rent-property" element={<RentProperty />} />
+        <Route path="lease-property" element={<LeaseProperty />} />
         <Route path="services" element={<Services />} />
         <Route path="buy" element={<Buy />} />
         <Route path="/email-confirmed" element={<EmailConfirm />} />
@@ -149,8 +154,7 @@ export function ProtectedRoutes({ children }) {
   }
 }
 
-// Public routes - when a user already login, he or she shouldn't have access to te login or regiser pages again
-
+// Public routes - when a user already login, he or she shouldn't have access to the login or register pages again
 export function PublicRoutes({ children }) {
   const user = localStorage.getItem("user");
   if (user !== "" && user) {

@@ -2,36 +2,36 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 // import Navbar from "../../component/Navbar/Navbar";
-import "./BuyProperty.css";
+import "./LeaseProperty.css";
 
-function BuyProperty() {
-  const [buyProperties, setBuyProperties] = useState([]);
+function LeaseProperty() {
+  const [leaseProperties, setLeaseProperties] = useState([]);
 
   // Get All Featured Poperties
-  const getAllBuyProperties = async () => {
+  const getAllLeaseProperties = async () => {
     const response = await axios.get(
-      "http://localhost:5000/api/property/get-property-buy"
+      "http://localhost:5000/api/property/get-property-lease"
     );
-    setBuyProperties(response.data.properties);
+    setLeaseProperties(response.data.properties);
 
     console.log(response.data.properties);
   };
   useEffect(() => {
-    getAllBuyProperties();
+    getAllLeaseProperties();
   }, []);
 
-  let limitFeatured = buyProperties.slice(0, 12);
+  let limitFeatured = leaseProperties.slice(0, 12);
   return (
     <div>
       {/* <Navbar /> */}
       <div className="dashboard-bg">
         <div className="dashboard-head">
-          <h1>Buy Property</h1>
+          <h1>Lease Property</h1>
         </div>
       </div>
       <div className="container mt-5">
         <div className="row justify-content-center text-center">
-          <h3 className="text-center">Buy Property</h3>
+          <h3 className="text-center">Lease Property</h3>
 
           <div className="mt-3 text-danger fw-bold"></div>
           {limitFeatured.map((property) => {
@@ -63,7 +63,7 @@ function BuyProperty() {
                                 data-bs-toggle="modal"
                                 data-bs-target="#exampleModal33"
                               >
-                                Buy Now
+                                Lease Now
                               </button>
                             </div>
                           </div>
@@ -89,7 +89,7 @@ function BuyProperty() {
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title text-center fs-5" id="exampleModalLabel">
-                Buy Now
+                Lease Now
               </h1>
               <button
                 type="button"
@@ -100,7 +100,7 @@ function BuyProperty() {
             </div>
             <div class="modal-body">
               <h3 className="text-center">Contact us +44 7992 1702 45</h3>
-              <h6 className="text-center">to buy this property</h6>
+              <h6 className="text-center">to Lease this property</h6>
             </div>
             {/* <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -113,4 +113,4 @@ function BuyProperty() {
   );
 }
 
-export default BuyProperty;
+export default LeaseProperty;

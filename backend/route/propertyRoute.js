@@ -19,6 +19,8 @@ const {
   fetchSearchProperties,
   getPropertiesByBuy,
   getPropertyLocationBuy,
+  getPropertyLocationRent,
+  getPropertyLocationLease,
 } = require("../controller/propertyController");
 const authMiddleware = require("../middleware/authMiddleware");
 const route = express.Router();
@@ -40,6 +42,8 @@ const upload = multer({ storage: storage });
 // All the routes for properties
 route.get("/get-all-properties", getAllProperties);
 route.get("/get-property-buy", getPropertiesByBuy)
+route.get("/get-property-rent", getPropertyLocationRent)
+route.get("/get-property-lease", getPropertyLocationLease)
 route.post("/get-property-location-buy", getPropertyLocationBuy)
 route.post('/fetch-buy-property', fetchSearchProperties)
 route.get("/count-all-properties", countProperty);

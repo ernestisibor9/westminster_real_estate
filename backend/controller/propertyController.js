@@ -416,6 +416,32 @@ const getPropertyLocationBuy = async (req, res) => {
 };
 
 
+// All Rented Properties
+const getPropertyLocationRent = async (req, res) => {
+  try {
+    const properties = await Property.find({ propertyFor: 'rent' });
+    res.status(200).json({
+      success: true,
+      properties: properties,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+// All Leased Properties
+const getPropertyLocationLease = async (req, res) => {
+  try {
+    const properties = await Property.find({ propertyFor: 'lease' });
+    res.status(200).json({
+      success: true,
+      properties: properties,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 
 
@@ -440,5 +466,7 @@ module.exports = {
   allLocation,
   fetchSearchProperties,
   getPropertiesByBuy,
-  getPropertyLocationBuy
+  getPropertyLocationBuy,
+  getPropertyLocationRent,
+  getPropertyLocationLease
 };

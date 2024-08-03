@@ -149,15 +149,15 @@ function Navbar() {
                 </Link>
               </li>
               <li class="nav-item">
-                <Link to="" class="nav-link">
+                <Link to="/rent-property" class="nav-link">
                   Rent
                 </Link>
               </li>
-              {/* <li class="nav-item">
-                <Link to='/list-property' class="nav-link">
-                  Properties
+              <li class="nav-item">
+                <Link to='/lease-property' class="nav-link">
+                  Lease
                 </Link>
-              </li> */}
+              </li>
               <li class="nav-item dropdown">
                 <Link
                   to="#"
