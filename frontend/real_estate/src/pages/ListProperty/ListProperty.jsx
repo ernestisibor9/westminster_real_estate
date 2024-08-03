@@ -16,6 +16,7 @@ function ListProperty() {
 
   const categories = ["buy", "rent", "lease"];
 
+  // Get user's details from the token generated
   const getPersonData = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("user"));
@@ -47,6 +48,7 @@ function ListProperty() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Search properties based on location
   const handleSearch = async (query) => {
     if (!query) {
       setFeaturedProperties([]);
@@ -72,7 +74,7 @@ function ListProperty() {
     handleSearch(query);
   }, [query]);
 
-  // Property for
+  // Search properties based on transaction - buy, rent, lease
   const handleFilter = async (propertyFor) => {
     if (!propertyFor) {
       setFeaturedProperties([]);

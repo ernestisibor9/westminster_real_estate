@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-// Create a function to hold my connection
+// Create a function to hold my database connection
 const dbConnect = () => {
   mongoose
     .connect(process.env.MONGO_URL)

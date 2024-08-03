@@ -2,7 +2,7 @@ const express = require('express');
 const { createOwnerProperty } = require('../controller/ownerPropertyController');
 const route = express.Router();
 
-// All the routes for users
+// Owner Property routes
 route.post('/owner-property', createOwnerProperty)
 
 

@@ -42,8 +42,7 @@ function ViewSingleProperty() {
 
   const { id } = useParams();
 
-  // API to get individual property
-
+  // Get individual property
   const getOneProperty = async () => {
     try {
       const response = await axios.get(
@@ -67,13 +66,6 @@ function ViewSingleProperty() {
     navigate("/login");
   };
 
-//   let imageSrc;
-//   try {
-//     imageSrc = require(`../../images/${singleProperty?.image}`);
-//   } catch (err) {
-//     console.error("Image not found:", err);
-//     imageSrc = require("../../images/propertyphoto.png"); // fallback to a default image
-//   }
 
   return (
     <div>

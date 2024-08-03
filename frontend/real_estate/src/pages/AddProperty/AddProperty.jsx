@@ -22,7 +22,7 @@ function AddProperty() {
 
   console.log(admin);
 
-  // Get users details
+  // Get users details from token generated
   const getPersonData = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("user"));
@@ -50,7 +50,7 @@ function AddProperty() {
     getPersonData();
   });
 
-  // Handleupload
+  // Handle Image Upload
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     setImage(files);
@@ -112,13 +112,13 @@ function AddProperty() {
   };
 
   const navigate = useNavigate();
+
   // logout
   const logout = () => {
     localStorage.removeItem("user");
-    // window.location.href = "/";
-
     navigate("/login");
   };
+  
   return (
     <div>
       <div className="dashboard-bg">

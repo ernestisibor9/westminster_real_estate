@@ -5,7 +5,7 @@ import "./EmailConfirm.css";
 function EmailConfirm() {
   return (
     <div>
-        <div className="dashboard-bg">
+      <div className="dashboard-bg">
         <div className="dashboard-head">
           <h1>Email Confirmation</h1>
         </div>
@@ -16,7 +16,9 @@ function EmailConfirm() {
             <h3 className="text-center">Email confirmed</h3>
             <h4>Your email has been confirmed!</h4>
             <p>You can now log in to your account.</p>
-            <Link to="/login" className="link-log">Go to Login</Link>
+            <Link to="/login" className="link-log">
+              Go to Login
+            </Link>
           </div>
         </div>
       </div>

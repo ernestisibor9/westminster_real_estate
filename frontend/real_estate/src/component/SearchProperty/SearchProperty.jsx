@@ -15,19 +15,16 @@ function SearchProperty() {
 
   const categoryTypes = ["building", "flat", "land"];
 
-  // Search properties
-  // const [properties, setProperties] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Cancel toggle
     // Toggle cancel button
     const toggleComponent = () => {
         setShow(false);
     };
     
-
-  // Property for
+  // Filter Properties Based on Transation
   const handleFilter = async (propertyFor) => {
     if (!propertyFor) {
       setFeaturedProperties([]);
@@ -55,7 +52,7 @@ function SearchProperty() {
     handleFilter(propertyFor);
   }, [propertyFor]);
 
-  // Property types
+  // Filter properties based on Property types
   const handleFilterTypes = async (propertyTypes) => {
     if (!propertyTypes) {
       setFeaturedProperties([]);

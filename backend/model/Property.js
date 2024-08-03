@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-// Create schema
+// Create schema - propertySchema
 const propertySchema = new mongoose.Schema(
   {
     admin: {
@@ -25,21 +25,21 @@ const propertySchema = new mongoose.Schema(
     // },
     image: [String],
     location: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
+    },
     propertyTypes: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     propertyFor: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     status: {
       type: String,
-      default: 'pending'
-  },
+      default: "pending",
+    },
   },
   {
     timestamps: true,

@@ -10,6 +10,7 @@ function Dashboard() {
   const [userInfo, setUserInfo] = useState();
   const [isAuthenticated, setIsAuthenticated] = useState();
 
+  // Get user's details from the token generated
   const getPersonData = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("user"));
@@ -42,10 +43,9 @@ function Dashboard() {
   // logout
   const logout = () => {
     localStorage.removeItem("user");
-    // window.location.href = "/";
-
     navigate("/login");
   };
+  
   return (
     <div>
       <div className="dashboard-bg">

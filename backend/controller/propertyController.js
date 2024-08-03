@@ -15,17 +15,9 @@ const createProperty = async (req, res) => {
       propertyTypes,
       propertyFor,
     } = req.body;
-    // const user = await User.findById(req.body.userId );
-    // console.log(user);
-    // if (!title || !description || !price || !location || !image) {
-    //     return res.status(400).json({ message: 'All fields are required' });
-    // }
-    // Image upload
-    // const imageName = req.file.filename
     const files = req.files;
     const urls = files.map((file) => `${file.filename}`);
     // ../frontend/real_estate/src/images/
-
     const newProperty = await Property.create({
       admin: admin,
       title: title,
@@ -34,8 +26,7 @@ const createProperty = async (req, res) => {
       image: urls,
       location: location,
       propertyTypes: propertyTypes,
-      propertyFor: propertyFor, // Assuming propertyType and propertyFor are passed in request body
-      // Assuming userId is passed in request body
+      propertyFor: propertyFor,
     });
     return res.status(201).json({
       success: true,
@@ -54,17 +45,15 @@ const getAllProperties = async (req, res) => {
       .sort({ createdAt: -1 })
       .populate("admin", "-password");
     res.json(properties);
-    // console.log(properties[0].admin.name);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-
-// List all Featured Home properties
+// Get all home properties
 const getAllHomeProperties = async (req, res) => {
   try {
-    const properties = await Property.find({status: 'active'})
+    const properties = await Property.find({ status: "active" })
       .sort({ createdAt: -1 })
       .populate("admin", "-password");
     res.json(properties);
@@ -188,36 +177,6 @@ const updateProperty = async (req, res) => {
   }
 };
 
-// Delete property
-// const deleteProperty = async (req, res) => {
-//   try {
-//     const { image } = req.body;
-//     const findProperty = await Property.findById(req.params.id);
-//     if (!findProperty) {
-//       return res.status(403).json({ message: "Invalid Property id" });
-//     }
-//     // Remove images from the product's images array
-//     findProperty.image = findProperty.image.filter(
-//       (image) => !image.includes(image)
-//     );
-
-//     await findProperty.save();
-//     if (findProperty.admin.toString() !== req.body.userId.toString()) {
-//       throw new Error(
-//         "You are not allowed to delete other people's properties"
-//       );
-//     } else {
-//       await Property.findByIdAndDelete(req.params.id);
-//       res.status(200).json({
-//         success: true,
-//         message: "Property deleted successfully",
-//       });
-//     }
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
 // Delete Product
 const deleteProperty = async (req, res) => {
   const id = req.params.id;
@@ -242,7 +201,6 @@ const featuredStatus = async (req, res) => {
     if (!item) {
       return res.status(404).json({ message: "Property not found" });
     }
-
     // Toggle status between 'active' and 'pending'
     item.featured = item.featured === "featured" ? "featured" : "non-featured";
     await item.save();
@@ -264,20 +222,15 @@ const updateMultipleImages = async (req, res) => {
       location: req.body.location,
       propertyTypes: req.body.propertyTypes,
       propertyFor: req.body.propertyFor,
-      // Append new image URLs to existing ones
-      // image: req.files.map((file) => `${file.filename}`),
       image: req.body.image
         ? req.body.image
         : req.files.map((file) => `${file.filename}`), // Existing photos should be an array of image filenames
     };
-    // ? req.files.map(file => file.path) : req.body.existingPhotos,
-
     const updatedProperty = await Property.findByIdAndUpdate(
       propertyId,
       updates,
       { new: true }
     );
-    // res.status(200).json(updatedProperty);
     return res.status(201).json({
       success: true,
       message: "Property updated successfully",
@@ -294,7 +247,6 @@ const existingProperties = async (req, res) => {
   if (!query) {
     return res.status(400).json({ message: "Query is required" });
   }
-
   try {
     // Search properties based on the location query
     const properties = await Property.find({
@@ -342,7 +294,6 @@ const propertyTypes = async (req, res) => {
   if (!propertyTypes) {
     return res.status(400).json({ message: "propertyType is required" });
   }
-
   try {
     const properties = await Property.find({ propertyTypes });
     if (properties.length === 0) {
@@ -357,8 +308,7 @@ const propertyTypes = async (req, res) => {
   }
 };
 
-// Location
-
+// All Location
 const allLocation = async (req, res) => {
   try {
     // Select only the location field
@@ -366,40 +316,37 @@ const allLocation = async (req, res) => {
     // const locations = await Property.find({}, "location");
     res.status(200).json({
       success: true,
-      locations: locations
+      locations: locations,
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-
 // Fetch Search Products
 const fetchSearchProperties = async (req, res) => {
   try {
     const { location, propertyTypes, price } = req.body;
-
     // Build query object
-    const query = { propertyFor: 'buy' };
+    const query = { propertyFor: "buy" };
     if (location) query.location = location;
     if (propertyTypes) query.type = propertyTypes;
     if (price) query.price = price;
-
     // Fetch filtered properties
     const properties = await Property.find(query);
     res.status(200).json({
-        success: true,
-        properties:properties
+      success: true,
+      properties: properties,
     });
-} catch (err) {
+  } catch (err) {
     res.status(500).json({ message: err.message });
-}
+  }
 };
 
 // Get all properties based on buy
-const getPropertiesByBuy = async(req, res) => {
+const getPropertiesByBuy = async (req, res) => {
   try {
-    const properties = await Property.find({ propertyFor: 'buy' });
+    const properties = await Property.find({ propertyFor: "buy" });
     res.status(200).json({
       success: true,
       properties: properties,
@@ -413,27 +360,24 @@ const getPropertiesByBuy = async(req, res) => {
 const getPropertyLocationBuy = async (req, res) => {
   try {
     const { location } = req.body;
-
     // Build query object
-    const query = { propertyFor: 'buy' };
+    const query = { propertyFor: "buy" };
     if (location) query.location = location;
-
     // Fetch filtered properties
     const properties = await Property.find(query);
     res.status(200).json({
-        success: true,
-        properties:properties
+      success: true,
+      properties: properties,
     });
-} catch (err) {
+  } catch (err) {
     res.status(500).json({ message: err.message });
-}
+  }
 };
-
 
 // All Rented Properties
 const getPropertyLocationRent = async (req, res) => {
   try {
-    const properties = await Property.find({ propertyFor: 'rent' });
+    const properties = await Property.find({ propertyFor: "rent" });
     res.status(200).json({
       success: true,
       properties: properties,
@@ -443,11 +387,10 @@ const getPropertyLocationRent = async (req, res) => {
   }
 };
 
-
 // All Leased Properties
 const getPropertyLocationLease = async (req, res) => {
   try {
-    const properties = await Property.find({ propertyFor: 'lease' });
+    const properties = await Property.find({ propertyFor: "lease" });
     res.status(200).json({
       success: true,
       properties: properties,
@@ -462,22 +405,23 @@ const updatePropertyStatus = async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
-
-    const property = await Property.findByIdAndUpdate(id, { status }, { new: true });
+    const property = await Property.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
     if (!property) {
-        return res.status(404).json({ message: 'Property not found' });
+      return res.status(404).json({ message: "Property not found" });
     }
     res.status(200).json({
-        success: true,
-        property
+      success: true,
+      property,
     });
-} catch (err) {
-    console.error('Error updating property status:', err);
-    res.status(500).json({ message: 'Internal server error' });
-}
+  } catch (err) {
+    console.error("Error updating property status:", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
-
-
 
 module.exports = {
   getAllProperties,
@@ -502,5 +446,5 @@ module.exports = {
   getPropertyLocationRent,
   getPropertyLocationLease,
   updatePropertyStatus,
-  getAllHomeProperties
+  getAllHomeProperties,
 };

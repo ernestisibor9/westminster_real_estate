@@ -7,7 +7,7 @@ import "./BuyProperty.css";
 function BuyProperty() {
   const [buyProperties, setBuyProperties] = useState([]);
 
-  // Get All Featured Poperties
+  // Get All Poperties Based on Buy
   const getAllBuyProperties = async () => {
     const response = await axios.get(
       "http://localhost:5000/api/property/get-property-buy"
@@ -102,10 +102,6 @@ function BuyProperty() {
               <h3 className="text-center">Contact us +44 7992 1702 45</h3>
               <h6 className="text-center">to buy this property</h6>
             </div>
-            {/* <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> */}
           </div>
         </div>
       </div>

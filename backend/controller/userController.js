@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 
-// Nodemailer
+// Nodemailer (Mailtrap.io configuration for mail sending)
 var transporter = nodemailer.createTransport({
   service: "smtp",
   host: "sandbox.smtp.mailtrap.io",
@@ -18,6 +18,7 @@ var transporter = nodemailer.createTransport({
   },
 });
 
+// Sending email using Nodemailer
 const sendConfirmationEmail = (userEmail, userName, confirmationCode) => {
   const mailOptions = {
     from: "your-email@gmail.com",
@@ -41,7 +42,6 @@ const sendConfirmationEmail = (userEmail, userName, confirmationCode) => {
 // Register a user
 const registerUser = async (req, res) => {
   const { name, email, password, phone } = req.body;
-
   try {
     const findIfUserExist = await User.findOne({ email: email });
     if (findIfUserExist) {
@@ -50,11 +50,9 @@ const registerUser = async (req, res) => {
         message: "User already exists",
       });
     }
-
     // Encrypt the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-
     // Create a new User
     const confirmationCode = crypto.randomBytes(16).toString("hex");
     const addUser = new User({
@@ -64,16 +62,13 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
       confirmationCode: confirmationCode, // Generate a confirmation code for email verification
     });
-
     await addUser.save();
-
     // Send the response to the client
     res.status(201).json({
       success: true,
       message: "User registered. Please check your email for confirmation.",
       addUser: addUser,
     });
-
     // Send confirmation email
     sendConfirmationEmail(
       addUser.email,
@@ -88,20 +83,16 @@ const registerUser = async (req, res) => {
 // Route to handle email confirmation
 const emailConfirmation = async (req, res) => {
   const { confirmationCode } = req.params;
-
   try {
     // Find the user with the matching confirmation code
     const user = await User.findOne({ confirmationCode });
-
     if (!user) {
       return res.status(400).json({ message: "Invalid confirmation code" });
     }
-
     // Confirm the user's email
     user.isConfirmed = true;
     user.confirmationCode = ""; // Clear the confirmation code
     await user.save();
-
     // Redirect to the frontend confirmation page
     res.redirect("http://localhost:3000/email-confirmed");
   } catch (err) {
@@ -113,7 +104,6 @@ const emailConfirmation = async (req, res) => {
 // Login a user
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
-
   try {
     const PersonExist = await User.findOne({ email: email });
     if (!PersonExist) {

@@ -3,14 +3,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-
 import "./EditProperty.css";
-// import { assets } from "../../assets/asset";
 
 function EditProperty() {
   const [isAuthenticated, setIsAuthenticated] = useState();
 
-  const {id} = useParams()
+  // Get users id from the URL
+  const { id } = useParams();
   console.log(id);
 
   const [title, setTitle] = useState();
@@ -22,32 +21,29 @@ function EditProperty() {
   const [propertyFor, setPropertyFor] = useState();
   const [image, setImage] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
-  // const [existingPhotos, setExistingPhotos] = useState(image || []);
 
- 
-      // API to get individual property
-      const getOneProperty = async()=>{
-        try{
-            const response = await axios.get(`http://localhost:5000/api/property/get-single-property/${id}`);
-            console.log(response.data);
-            setTitle(response.data.title);
-            setDescription(response.data.description);
-            setPrice(response.data.price);
-            setLocation(response.data.location);
-            setPropertyTypes(response.data.propertyTypes);
-            setPropertyFor(response.data.propertyFor);
-            setImage(response.data.image);
-        }
-        catch(err){
+  // API to fetch one record
+  const getOneProperty = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/property/get-single-property/${id}`
+      );
+      console.log(response.data);
+      setTitle(response.data.title);
+      setDescription(response.data.description);
+      setPrice(response.data.price);
+      setLocation(response.data.location);
+      setPropertyTypes(response.data.propertyTypes);
+      setPropertyFor(response.data.propertyFor);
+      setImage(response.data.image);
+    } catch (err) {}
+  };
 
-        }
-    }
+  useEffect(() => {
+    getOneProperty();
+  });
 
-    useEffect(()=>{
-        getOneProperty()
-    })
-
-  // Get users details
+  // Get users details from the token generated
   const getPersonData = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("user"));
@@ -75,7 +71,7 @@ function EditProperty() {
     getPersonData();
   });
 
-  // Handleupload
+  // Handle multiple image uploads
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     setImage(files);
@@ -96,18 +92,12 @@ function EditProperty() {
     formData.append("propertyTypes", propertyTypes);
     formData.append("propertyFor", propertyFor);
     formData.append("admin", admin);
-  
-    // if (existingPhotos.length > 0) {
-    //   formData.append("existingPhotos", JSON.stringify(existingPhotos));
-    // }
 
     if (image) {
       for (let i = 0; i < image.length; i++) {
         formData.append("image", image[i]);
       }
     }
-    
-    // formData.append("image", image);
 
     if (
       title === "" ||
@@ -134,8 +124,6 @@ function EditProperty() {
         console.log(response.data);
         if (response.data.success) {
           toast.success(response.data.message);
-          // setExistingPhotos(response.data)
-          // setUploadedImg(true);
         } else {
           toast.error(response.data.message);
         }
@@ -149,8 +137,6 @@ function EditProperty() {
   // logout
   const logout = () => {
     localStorage.removeItem("user");
-    // window.location.href = "/";
-
     navigate("/login");
   };
   return (
@@ -164,7 +150,7 @@ function EditProperty() {
         <div className="row">
           <div className="col-md-2 bg-primary sidebar">
             <div>
-            <ul>
+              <ul>
                 <li>
                   <Link
                     to="/dashboard"
@@ -173,32 +159,31 @@ function EditProperty() {
                     Dashboard
                   </Link>
                 </li>
-                {
-                  isAuthenticated === "admin" && (
-                    <li>
-                      <Link
-                        to="/add-property"
-                        className="text-white text-decoration-none"
-                      >
-                        Add Property
-                      </Link>
-                    </li>
-                  )
-                }
-                {
-                  isAuthenticated === "admin" && (
-                    <li>
-                      <Link
-                        to="/manage-property"
-                        className="text-white text-decoration-none"
-                      >
-                        Manage Property
-                      </Link>
-                    </li>
-                  )
-                }
+                {isAuthenticated === "admin" && (
+                  <li>
+                    <Link
+                      to="/add-property"
+                      className="text-white text-decoration-none"
+                    >
+                      Add Property
+                    </Link>
+                  </li>
+                )}
+                {isAuthenticated === "admin" && (
+                  <li>
+                    <Link
+                      to="/manage-property"
+                      className="text-white text-decoration-none"
+                    >
+                      Manage Property
+                    </Link>
+                  </li>
+                )}
                 <li>
-                  <Link to="/list-properties" className="text-white text-decoration-none">
+                  <Link
+                    to="/list-properties"
+                    className="text-white text-decoration-none"
+                  >
                     List Properties
                   </Link>
                 </li>
@@ -242,7 +227,7 @@ function EditProperty() {
                       />
                     </div>
                     <div class="col">
-                    <small>Price</small>
+                      <small>Price</small>
                       <input
                         type="text"
                         class="form-control"
@@ -256,7 +241,7 @@ function EditProperty() {
                   </div>
                   <div class="row mb-3">
                     <div class="col">
-                    <small>Property Type</small>
+                      <small>Property Type</small>
                       <select
                         class="form-select"
                         aria-label="Default select example"
@@ -271,8 +256,8 @@ function EditProperty() {
                       </select>
                     </div>
                     <div class="col">
-                    <small>Property For</small>
-                    <select
+                      <small>Property For</small>
+                      <select
                         class="form-select"
                         aria-label="Default select example"
                         name="propertyFor"
@@ -297,16 +282,17 @@ function EditProperty() {
                         aria-label="First name"
                       />
                       <div className="d-flex justify-content-around mt-4">
-                        {image && imagePreviews.map((preview, index) => (
-                          <img
-                            key={index}
-                            src={preview}
-                            alt=""
-                            className="img-fluid"
-                            width={100}
-                            height={100}
-                          />
-                        ))}
+                        {image &&
+                          imagePreviews.map((preview, index) => (
+                            <img
+                              key={index}
+                              src={preview}
+                              alt=""
+                              className="img-fluid"
+                              width={100}
+                              height={100}
+                            />
+                          ))}
                       </div>
                       {/* <img
                         src={

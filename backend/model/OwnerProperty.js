@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Create schema
+// Create schema - ownerPropertySchema
 const ownerPropertySchema = new mongoose.Schema({
     ownerName: {
         type: String,

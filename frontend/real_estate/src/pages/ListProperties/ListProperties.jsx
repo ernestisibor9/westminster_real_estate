@@ -16,10 +16,10 @@ function ListProperties() {
 
   // Search properties
   const [query, setQuery] = useState("");
-  // const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Search properties based on location
   const handleSearch = async (query) => {
     if (!query) {
       setFeaturedProperties([]);
@@ -45,7 +45,7 @@ function ListProperties() {
     handleSearch(query);
   }, [query]);
 
-  // Property for
+  // Search properties based on the transaction - buy, rent, lease
   const handleFilter = async (propertyFor) => {
     if (!propertyFor) {
       setFeaturedProperties([]);
@@ -72,7 +72,7 @@ function ListProperties() {
   }, [propertyFor]);
 
 
-// Property types
+// Seacrh properties based on Property types
 const handleFilterTypes = async (propertyTypes) => {
   if (!propertyTypes) {
     setFeaturedProperties([]);

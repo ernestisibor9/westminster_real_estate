@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
-// import Navbar from "../../component/Navbar/Navbar";
 
 import { FaSearch, FaCarSide } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
@@ -21,7 +20,7 @@ function Search() {
 
   // Search properties
   const [query, setQuery] = useState("");
-  // const [properties, setProperties] = useState([]);
+ 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -30,7 +29,7 @@ function Search() {
     setShow(false);
   };
 
-  // Handle search2
+  // Handle search2 - to search for properties based on location
   const handleSearch2 = async (query) => {
     if (query === "") {
       setFeaturedProperties([]);
@@ -64,6 +63,7 @@ function Search() {
     handleSearch2(query);
   }, [query]);
 
+   // Handle search - to search for properties based on location
   const handleSearch = async (query) => {
     if (!query) {
       setFeaturedProperties([]);
@@ -92,7 +92,7 @@ function Search() {
     handleSearch(query);
   }, [query]);
 
-  // Property for
+  // Transaction of properties based on buy,rent,lease
   const handleFilter = async (propertyFor) => {
     if (!propertyFor) {
       setFeaturedProperties([]);
@@ -118,7 +118,7 @@ function Search() {
     handleFilter(propertyFor);
   }, [propertyFor]);
 
-  // Property types
+    // Filter Property Types
   const handleFilterTypes = async (propertyTypes) => {
     if (!propertyTypes) {
       setFeaturedProperties([]);

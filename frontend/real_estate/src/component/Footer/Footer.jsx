@@ -1,5 +1,14 @@
 import React from "react";
-import { FaHome, FaPhoneAlt, FaPrint, FaFacebook, FaTwitter, FaWhatsappSquare, FaInstagramSquare, FaYoutube } from "react-icons/fa";
+import {
+  FaHome,
+  FaPhoneAlt,
+  FaPrint,
+  FaFacebook,
+  FaTwitter,
+  FaWhatsappSquare,
+  FaInstagramSquare,
+  FaYoutube,
+} from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import "./Footer.css";
 import { Link } from "react-router-dom";
@@ -21,13 +30,23 @@ function Footer() {
                 selling, or renting, we are here to guide you every step of the
                 way.
               </small>
-              <hr className="mb-3" style={{color:'white'}}/>
+              <hr className="mb-3" style={{ color: "white" }} />
               <div className="d-flex">
-                <Link to = '' className="text-white fa"><FaFacebook /></Link>
-                <Link to = '' className="text-white fa"><FaTwitter /></Link>
-                <Link to = '' className="text-white fa"><FaWhatsappSquare /></Link>
-                <Link to = '' className="text-white fa"><FaInstagramSquare /></Link>
-                <Link to = '' className="text-white fa"><FaYoutube /></Link>
+                <Link to="" className="text-white fa">
+                  <FaFacebook />
+                </Link>
+                <Link to="" className="text-white fa">
+                  <FaTwitter />
+                </Link>
+                <Link to="" className="text-white fa">
+                  <FaWhatsappSquare />
+                </Link>
+                <Link to="" className="text-white fa">
+                  <FaInstagramSquare />
+                </Link>
+                <Link to="" className="text-white fa">
+                  <FaYoutube />
+                </Link>
               </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
@@ -36,22 +55,22 @@ function Footer() {
               <ul class="list-unstyled mb-0">
                 <li>
                   <a href="#!" class="text-white my-list">
-                    <p style={{fontSize:'14px'}}>Home</p>
+                    <p style={{ fontSize: "14px" }}>Home</p>
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white my-list">
-                  <p style={{fontSize:'14px'}}>About</p>
+                    <p style={{ fontSize: "14px" }}>About</p>
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white my-list">
-                  <p style={{fontSize:'14px'}}>Services</p>
+                    <p style={{ fontSize: "14px" }}>Services</p>
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white my-list">
-                  <p style={{fontSize:'14px'}}>Properties</p>
+                    <p style={{ fontSize: "14px" }}>Properties</p>
                   </a>
                 </li>
               </ul>
@@ -63,22 +82,28 @@ function Footer() {
               <ul class="list-unstyled">
                 <li>
                   <a href="#!" class="text-white my-list">
-                    <FaHome /> &nbsp; <span style={{fontSize:'14px'}}>London, UK</span>
+                    <FaHome /> &nbsp;{" "}
+                    <span style={{ fontSize: "14px" }}>London, UK</span>
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white my-list">
-                    <IoMdMail /> &nbsp; <span style={{fontSize:'14px'}}>info@realestate.com</span>
+                    <IoMdMail /> &nbsp;{" "}
+                    <span style={{ fontSize: "14px" }}>
+                      info@realestate.com
+                    </span>
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white my-list">
-                    <FaPhoneAlt /> &nbsp; <span style={{fontSize:'14px'}}>+44 9340 2729 01</span>
+                    <FaPhoneAlt /> &nbsp;{" "}
+                    <span style={{ fontSize: "14px" }}>+44 9340 2729 01</span>
                   </a>
                 </li>
                 <li>
                   <a href="#!" class="text-white my-list">
-                    <FaPrint /> &nbsp; <span style={{fontSize:'14px'}}>+ 01 2342 8567 89 </span>
+                    <FaPrint /> &nbsp;{" "}
+                    <span style={{ fontSize: "14px" }}>+ 01 2342 8567 89 </span>
                   </a>
                 </li>
               </ul>
@@ -89,8 +114,9 @@ function Footer() {
           class="text-center text-white p-3"
           style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
         >
-          <span style={{fontSize:'14px'}}>Copyright © 2024. All rights reserved</span>
-
+          <span style={{ fontSize: "14px" }}>
+            Copyright © 2024. All rights reserved
+          </span>
         </div>
       </footer>
     </div>

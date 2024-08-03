@@ -7,7 +7,7 @@ import "./LeaseProperty.css";
 function LeaseProperty() {
   const [leaseProperties, setLeaseProperties] = useState([]);
 
-  // Get All Featured Poperties
+  // Get All Poperties Based on Lease
   const getAllLeaseProperties = async () => {
     const response = await axios.get(
       "http://localhost:5000/api/property/get-property-lease"
@@ -23,7 +23,6 @@ function LeaseProperty() {
   let limitFeatured = leaseProperties.slice(0, 12);
   return (
     <div>
-      {/* <Navbar /> */}
       <div className="dashboard-bg">
         <div className="dashboard-head">
           <h1>Lease Property</h1>

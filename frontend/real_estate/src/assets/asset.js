@@ -16,6 +16,7 @@ import smallavatar5 from "./smallavatar5.jpg";
 import smallavatar6 from "./smallavatar6.jpg";
 import team from "./team.jpg";
 
+// Images components to be exported
 export const assets = {
   logo,
   house1,

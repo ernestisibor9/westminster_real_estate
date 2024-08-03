@@ -9,7 +9,7 @@ function FeaturedProperties() {
   const [featuredProperties, setFeaturedProperties] = useState([]);
   console.log(featuredProperties);
 
-  // Get All Featured Poperties
+  // Get All Featured Poperties (Home page properties)
   const getAllFeaturedProperties = async () => {
     const response = await axios.get(
       "http://localhost:5000/api/property/get-all-properties-home"
@@ -21,6 +21,7 @@ function FeaturedProperties() {
     getAllFeaturedProperties();
   }, []);
 
+  // Limit the number of properties shown on the homepage to 6
   let limitFeatured = featuredProperties.slice(0,6)
 
   return (
@@ -40,14 +41,6 @@ function FeaturedProperties() {
                         className="my-img hover-image"
                       />
                     )}
-                    {/* <img src={require(`../../images/${property.image}`)} alt="" className="img-fluid hover-image" /> */}
-                    {/* {
-                property.image.map((item)=>{
-                  return(
-                    <img src={require(`../../images/${item}`)} alt="" className="img-fluid hover-image" />
-                  )
-                })
-              } */}
                     <div className="pt-3">
                     <p>Name: {property?.title}</p>
                     <p>Property Type: {property?.propetyTypes}</p>

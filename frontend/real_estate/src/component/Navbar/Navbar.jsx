@@ -8,19 +8,22 @@ import { toast } from "react-toastify";
 // import Search from "../Search/Search";
 
 function Navbar() {
+  // useState for active menu
   const [activeMenuItem, setActiveMenuItem] = useState("");
+  // useState for authentication
   const [isAuthenticated, setIsAuthenticated] = useState();
-
-  // Logout
+ 
+  // useNavigate for navigation
   const navigate = useNavigate();
-  // logout
+
+  // Logout functionality
   const logout = () => {
     localStorage.removeItem("user");
     // window.location.href = "/";
     navigate("/login");
   };
 
-  // Get users details
+  // Get users details from the token generated
   const getPersonData = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("user"));
@@ -38,11 +41,12 @@ function Navbar() {
         // toast.error("Invalid authorization");
       }
     } catch (error) {
-      toast.error(error);
+      // toast.error(error);
       console.log(error);
     }
   };
 
+  // getPersonData() is invoked in the useEffect method
   useEffect(() => {
     getPersonData();
   });
@@ -184,8 +188,6 @@ function Navbar() {
                       Property Owner
                     </button>
                   </li>
-                  {/* <li><hr class="dropdown-divider"/></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li> */}
                 </ul>
               </li>
               <li class="nav-item">

@@ -17,6 +17,7 @@ function ManageProperty() {
   const [allProperties, setAllProperties] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
 
+  // Get user details from token generated
   const getPersonData = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("user"));

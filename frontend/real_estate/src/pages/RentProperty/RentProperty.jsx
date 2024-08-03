@@ -7,7 +7,7 @@ import "./RentProperty.css";
 function RentProperty() {
   const [rentProperties, setRentProperties] = useState([]);
 
-  // Get All Featured Poperties
+  // Get All Rented Poperties
   const getAllRentProperties = async () => {
     const response = await axios.get(
       "http://localhost:5000/api/property/get-property-rent"
