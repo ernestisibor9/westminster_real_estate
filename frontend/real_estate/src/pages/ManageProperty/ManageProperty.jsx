@@ -200,7 +200,15 @@ function ManageProperty() {
                       <td>{property.title}</td>
                       <td>{property.location}</td>
                       <td>&pound;{property.price}</td>
-                      <td>{property.status}</td>
+                      <td>
+                        {
+                          property.status === 'pending' ? (
+                            <span className="badge text-bg-warning">{property.status}</span>
+                          ) : (
+                            <span className="badge text-bg-success">{property.status}</span>
+                          )
+                        }
+                      </td>
                       {/* <td>{property.description(0, 20)}</td> */}
                       <td>
                         <Link

@@ -107,8 +107,8 @@ function Navbar() {
       <nav class="navbar sticky-top navbar-expand-lg ">
         <div class="container-fluid">
           <Link to="/" class="navbar-brand">
-            <span className="text-dark fw-bold">Real</span>
-            <span className="text-danger fw-bold">Estate</span>
+            <span className="text-dark fw-bold">Property</span>
+            <span className="text-danger fw-bold">Paddy</span>
           </Link>
           <button
             class="navbar-toggler"
