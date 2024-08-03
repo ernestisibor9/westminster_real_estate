@@ -54,7 +54,21 @@ const getAllProperties = async (req, res) => {
       .sort({ createdAt: -1 })
       .populate("admin", "-password");
     res.json(properties);
-    console.log(properties[0].admin.name);
+    // console.log(properties[0].admin.name);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+// List all Featured Home properties
+const getAllHomeProperties = async (req, res) => {
+  try {
+    const properties = await Property.find({status: 'active'})
+      .sort({ createdAt: -1 })
+      .populate("admin", "-password");
+    res.json(properties);
+    // console.log(properties[0].admin.name);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -443,7 +457,25 @@ const getPropertyLocationLease = async (req, res) => {
   }
 };
 
+// Update properties based on status
+const updatePropertyStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
 
+    const property = await Property.findByIdAndUpdate(id, { status }, { new: true });
+    if (!property) {
+        return res.status(404).json({ message: 'Property not found' });
+    }
+    res.status(200).json({
+        success: true,
+        property
+    });
+} catch (err) {
+    console.error('Error updating property status:', err);
+    res.status(500).json({ message: 'Internal server error' });
+}
+};
 
 
 
@@ -468,5 +500,7 @@ module.exports = {
   getPropertiesByBuy,
   getPropertyLocationBuy,
   getPropertyLocationRent,
-  getPropertyLocationLease
+  getPropertyLocationLease,
+  updatePropertyStatus,
+  getAllHomeProperties
 };

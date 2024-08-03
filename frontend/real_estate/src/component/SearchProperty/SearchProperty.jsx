@@ -154,7 +154,7 @@ function SearchProperty() {
                       <div className="col-md-4 mt-3">
                         <div className="card shadow">
                           <div className="card-body">
-                            <Link to="" className="feat-style">
+                            <Link to={`/property-details/${property._id}`} className="feat-style">
                               {property.image.length > 0 && (
                                 <img
                                   src={require(`../../images/${property.image[0]}`)}
@@ -162,18 +162,13 @@ function SearchProperty() {
                                   className="my-img hover-image"
                                 />
                               )}
-                              <h6 className="text-center pt-3">
-                                Title: {property?.title}
-                              </h6>
-                              <p className="text-center">
-                                Transation: {property?.propertyFor}
-                              </p>
-                              <p className="text-center">
-                                Type: {property?.propertyTypes}
-                              </p>
-                              <p className="text-center">
-                                Location: {property?.location}
-                              </p>
+                              <div className="pt-3 text-center">
+                    <p>Name: {property?.title}</p>
+                    <p>Property Type: {property?.propetyTypes}</p>
+                    {/* <p>Transaction: {property?.propertyFor}</p> */}
+                    <p>Price: &#163;{property?.price.toFixed(2)}</p>
+                    <p>Location: {property?.location}</p>
+                    </div>
                             </Link>
                           </div>
                         </div>

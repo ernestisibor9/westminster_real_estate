@@ -21,6 +21,8 @@ const {
   getPropertyLocationBuy,
   getPropertyLocationRent,
   getPropertyLocationLease,
+  updatePropertyStatus,
+  getAllHomeProperties,
 } = require("../controller/propertyController");
 const authMiddleware = require("../middleware/authMiddleware");
 const route = express.Router();
@@ -44,12 +46,14 @@ route.get("/get-all-properties", getAllProperties);
 route.get("/get-property-buy", getPropertiesByBuy)
 route.get("/get-property-rent", getPropertyLocationRent)
 route.get("/get-property-lease", getPropertyLocationLease)
+route.get('/get-all-properties-home', getAllHomeProperties)
 route.post("/get-property-location-buy", getPropertyLocationBuy)
 route.post('/fetch-buy-property', fetchSearchProperties)
 route.get("/count-all-properties", countProperty);
 route.get("/get-single-property/:id", getSingleProperty);
 route.get("/get-one-property/:id", getOneProperty);
 route.get("/all-location", allLocation);
+route.put('/update-property-status/:id', updatePropertyStatus);
 route.put("/update-property/:id", authMiddleware, updateProperty);
 route.delete("/delete-property/:id", authMiddleware, deleteProperty);
 route.get("/available-properties", availableProperties);

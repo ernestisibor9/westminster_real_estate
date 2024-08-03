@@ -49,7 +49,6 @@ function App() {
     "/manage-property",
     "/view-single-property/:id",
     "/edit-property/:id",
-    "/property-details/:id",
   ];
 
   const matchesNoNavbarRoute = (path) => {

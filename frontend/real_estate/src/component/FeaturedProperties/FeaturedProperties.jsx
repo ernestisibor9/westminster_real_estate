@@ -12,7 +12,7 @@ function FeaturedProperties() {
   // Get All Featured Poperties
   const getAllFeaturedProperties = async () => {
     const response = await axios.get(
-      "http://localhost:5000/api/property/get-all-properties"
+      "http://localhost:5000/api/property/get-all-properties-home"
     );
     setFeaturedProperties(response.data);
     console.log(response.data);
@@ -48,8 +48,13 @@ function FeaturedProperties() {
                   )
                 })
               } */}
-                    <h5>{property?.title}</h5>
-                    <p>{property?.description}</p>
+                    <div className="pt-3">
+                    <p>Name: {property?.title}</p>
+                    <p>Property Type: {property?.propetyTypes}</p>
+                    {/* <p>Transaction: {property?.propertyFor}</p> */}
+                    <p>Price: &#163;{property?.price.toFixed(2)}</p>
+                    <p>Location: {property?.location}</p>
+                    </div>
                   </Link>
                 </div>
               </div>

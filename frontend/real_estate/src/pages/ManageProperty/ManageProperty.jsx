@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaEye, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { MdNotificationsActive } from "react-icons/md";
 
 
 import "./ManageProperty.css";
@@ -89,6 +90,22 @@ function ManageProperty() {
       console.log(err);
     }
   };
+
+  // Toggle status
+  const toggleStatus = async (id, currentStatus) => {
+    const newStatus = currentStatus === 'active' ? 'pending' : 'active';
+    try {
+        const response = await axios.put(`http://localhost:5000/api/property/update-property-status/${id}`, {
+            status: newStatus
+        });
+        if(response.data.success){
+          getAllProperties();
+          toast.success('Property status updated')
+        }
+    } catch (error) {
+        console.error('Error updating property status:', error.message);
+    }
+};
   return (
     <div>
       <div className="dashboard-bg">
@@ -160,6 +177,7 @@ function ManageProperty() {
                   <th scope="col">Property Title</th>
                   <th scope="col">Location</th>
                   <th scope="col">Price</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -182,6 +200,7 @@ function ManageProperty() {
                       <td>{property.title}</td>
                       <td>{property.location}</td>
                       <td>&pound;{property.price}</td>
+                      <td>{property.status}</td>
                       {/* <td>{property.description(0, 20)}</td> */}
                       <td>
                         <Link
@@ -204,6 +223,15 @@ function ManageProperty() {
                           onClick={()=>deleteProperty(property._id)}
                         >
                           <MdDelete />
+                        </Link>
+                        {/* <button className="btn btn-primary" onClick={() => toggleStatus(property._id, property.status)}>
+                        {property.status === 'active' ? 'Set as Pending' : 'Set as Active'}
+                        </button> */}
+                        <Link
+                          className="p-2 fs-5 text-tertiary "
+                          title="Change Status"
+                          onClick={() => toggleStatus(property._id, property.status)}>
+                            <MdNotificationsActive />
                         </Link>
                       </td>
                     </tr>
