@@ -27,3 +27,11 @@ ul li{
     color: #fff !important;
     margin-left: -10px;
 }
+
+
+
+@media screen and (max-width: 520px) {
+    .sidebar{
+        height: 40vh;
+    }
+  }

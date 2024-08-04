@@ -156,3 +156,10 @@ body {
     /* bottom: 20px; */
     right: 30px;
 }
+
+
+@media screen and (max-width: 520px) {
+    .my-select{
+        width: '20%';
+    }
+  }

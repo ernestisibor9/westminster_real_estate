@@ -170,6 +170,7 @@ function ManageProperty() {
           </div>
           <div className="col-md-1"></div>
           <div className="col-md-8 mt-4 text-center">
+            <div className="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -200,7 +201,7 @@ function ManageProperty() {
                       </td>
                       <td>{property.title}</td>
                       <td>{property.location}</td>
-                      <td>&pound;{property.price}</td>
+                      <td>&pound;{property.price.toFixed(2)}</td>
                       <td>
                         {
                           property.status === 'pending' ? (
@@ -248,6 +249,7 @@ function ManageProperty() {
                 })}
               </tbody>
             </table>
+            </div>
           </div>
           <div className="col-md-1"></div>
         </div>

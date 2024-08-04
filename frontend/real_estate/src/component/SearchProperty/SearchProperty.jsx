@@ -102,7 +102,7 @@ function SearchProperty() {
           <div class="col-md-3 align-items-center d-flex justify-content-around mx-3 p-2 shadow my-3 mt-md-0 fs-8">
             <i class="fa-solid fa-house ms-2 fs-7 text-danger"></i>
             <select
-              class=" text-center w-75 border-0 active no-focus form-select"
+              class=" text-center w-75 border-0 active no-focus form- my-select"
               value={propertyFor}
               onChange={(e) => setPropertyFor(e.target.value)}
             >
@@ -118,7 +118,7 @@ function SearchProperty() {
           <div class="col-md-3 align-items-center d-flex justify-content-around mx-3 p-2 shadow my-3 mt-md-0 fs-8">
             <i class="fa-solid fa-tag fs-7 text-danger"></i>
             <select
-              class="text-center w-75 border-0 active no-focus form-select"
+              class="text-center w-75 border-0 active no-focus form-select my-select"
               value={propertyTypes}
               onChange={(e) => setPropertyTypes(e.target.value)}
             >
