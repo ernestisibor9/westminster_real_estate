@@ -66,6 +66,11 @@ function Dashboard() {
                     Dashboard
                   </Link>
                 </li>
+                <li>
+                  <Link to="/" className="text-white text-decoration-none">
+                    Home
+                  </Link>
+                </li>
                 {
                   isAuthenticated === "admin" && (
                     <li>

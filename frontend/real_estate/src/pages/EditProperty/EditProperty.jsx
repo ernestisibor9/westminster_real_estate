@@ -251,8 +251,8 @@ function EditProperty() {
                         <option disabled>Select Property Type</option>
                         <option value={propertyTypes}>{propertyTypes}</option>
                         <option value="land">Land</option>
-                        <option value="building">Building</option>
                         <option value="flat">Flat</option>
+                        <option value="shared apartment">Shared Apartment</option>
                       </select>
                     </div>
                     <div class="col">
@@ -265,8 +265,10 @@ function EditProperty() {
                       >
                         <option disabled>Property For</option>
                         <option value={propertyFor}>{propertyFor}</option>
+                        <option value="buy">Buy</option>
                         <option value="rent">Rent</option>
                         <option value="lease">Lease</option>
+                        <option value="short let">Short Let</option>
                       </select>
                     </div>
                   </div>

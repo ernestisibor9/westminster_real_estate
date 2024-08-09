@@ -23,3 +23,13 @@
     color: red;
     font-size: bold;
 }
+.pass{
+    position: relative;
+}
+.eye{
+    position: absolute;
+    bottom: 189px;
+    right: 42px;
+    cursor: pointer;
+    font-size: 1.3rem;
+}

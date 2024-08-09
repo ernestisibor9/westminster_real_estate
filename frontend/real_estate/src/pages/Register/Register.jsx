@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./Register.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa6";
 
 function Register() {
   const users = {
@@ -17,6 +19,8 @@ function Register() {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
+  // Navigate
+  const navigate = useNavigate();
   // handleSubmit - to connect the backend to the frontend
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,6 +42,7 @@ function Register() {
         console.log(response);
         if (response.data.success) {
           toast.success(response.data.message);
+          navigate("/login");
         } else {
           toast.error(response.data.message);
         }
@@ -81,9 +86,11 @@ function Register() {
                       className="form-control"
                       name="password"
                       onChange={inputChangeHandler}
-                      id=""
+                      id="pass"
                       placeholder="Password"
                     />
+                    <FaEye className="eye" id="fa-eye"/>
+                    <FaEyeSlash className="eye" id="fa-eye-slash"/>
                   </div>
                   <div className="mb-3">
                     <input

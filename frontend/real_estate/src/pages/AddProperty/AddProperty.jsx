@@ -139,6 +139,11 @@ function AddProperty() {
                     Dashboard
                   </Link>
                 </li>
+                <li>
+                  <Link to="/" className="text-white text-decoration-none">
+                    Home
+                  </Link>
+                </li>
                 {
                   isAuthenticated === "admin" && (
                     <li>
@@ -229,7 +234,7 @@ function AddProperty() {
                       >
                         <option disabled>Select Property Type</option>
                         <option value="land">Land</option>
-                        <option value="building">Building</option>
+                        <option value="building">Shared Apartment</option>
                         <option value="flat">Flat</option>
                       </select>
                     </div>
@@ -245,6 +250,7 @@ function AddProperty() {
                         <option value="buy">Buy</option>
                         <option value="rent">Rent</option>
                         <option value="lease">Lease</option>
+                        <option value="short let">Short Let</option>
                       </select>
                     </div>
                   </div>

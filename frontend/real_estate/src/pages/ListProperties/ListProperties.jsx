@@ -10,9 +10,9 @@ function ListProperties() {
   const [propertyFor, setPropertyFor] = useState("");
   const [propertyTypes, setPropertyTypes] = useState("");
 
-  const categories = ["buy", "rent", "lease"];
+  const categories = ["buy", "rent", "lease", "short let "];
 
-  const categoryTypes = ["building", "flat", "land"];
+  const categoryTypes = ["shared apartment", "flat", "land"];
 
   // Search properties
   const [query, setQuery] = useState("");

@@ -54,24 +54,24 @@ function Footer() {
 
               <ul class="list-unstyled mb-0">
                 <li>
-                  <a href="#!" class="text-white my-list">
+                  <Link to = '/' class="text-white my-list">
                     <p style={{ fontSize: "14px" }}>Home</p>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#!" class="text-white my-list">
+                  <Link to='/about' class="text-white my-list">
                     <p style={{ fontSize: "14px" }}>About</p>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#!" class="text-white my-list">
+                  <Link to = '/services' class="text-white my-list">
                     <p style={{ fontSize: "14px" }}>Services</p>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#!" class="text-white my-list">
+                  <Link to ='/list-property' class="text-white my-list">
                     <p style={{ fontSize: "14px" }}>Properties</p>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

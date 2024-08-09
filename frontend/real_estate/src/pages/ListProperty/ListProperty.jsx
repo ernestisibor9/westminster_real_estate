@@ -12,9 +12,9 @@ function ListProperty() {
   const [propertyFor, setPropertyFor] = useState("");
   const [propertyTypes, setPropertyTypes] = useState("");
 
-  const categoryTypes = ["building", "flat", "land"];
+  const categoryTypes = ["shared apartment", "flat", "land"];
 
-  const categories = ["buy", "rent", "lease"];
+  const categories = ["buy", "rent", "lease", "short let"];
 
   // Get user's details from the token generated
   const getPersonData = async () => {
@@ -166,6 +166,11 @@ function ListProperty() {
                     className="text-white text-decoration-none"
                   >
                     Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/" className="text-white text-decoration-none">
+                    Home
                   </Link>
                 </li>
                 {isAuthenticated === "admin" && (
