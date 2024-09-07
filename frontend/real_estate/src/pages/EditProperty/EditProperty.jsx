@@ -31,7 +31,7 @@ function EditProperty() {
   const getOneProperty = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/property/get-single-property/${id}`
+        `https://westminster-real-estate-backend.onrender.com/api/property/get-single-property/${id}`
       );
       setTitle(response.data.title);
       setDescription(response.data.description);
@@ -55,7 +55,7 @@ function EditProperty() {
       }
 
       const response = await axios.get(
-        "http://localhost:5000/api/user/getloggedinuser",
+        "https://westminster-real-estate-backend.onrender.com/api/user/getloggedinuser",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -109,7 +109,7 @@ function EditProperty() {
     try {
       const token = JSON.parse(localStorage.getItem("user"));
       const response = await axios.put(
-        `http://localhost:5000/api/property/update-multiple-images/${id}`,
+        `https://westminster-real-estate-backend.onrender.com/api/property/update-multiple-images/${id}`,
         formData,
         {
           headers: {
