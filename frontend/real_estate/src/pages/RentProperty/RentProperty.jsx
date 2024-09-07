@@ -10,7 +10,7 @@ function RentProperty() {
   // Get All Rented Poperties
   const getAllRentProperties = async () => {
     const response = await axios.get(
-      "http://localhost:5000/api/property/get-property-rent"
+      "https://westminster-real-estate-backend.onrender.com/api/property/get-property-rent"
     );
     setRentProperties(response.data.properties);
 
