@@ -40,6 +40,7 @@ const sendConfirmationEmail = (userEmail, userName, confirmationCode) => {
 };
 
 // Register a user
+// Register a user
 const registerUser = async (req, res) => {
   const { name, email, password, phone } = req.body;
   try {
@@ -79,6 +80,7 @@ const registerUser = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
 
 
 // Route to handle email confirmation
