@@ -58,7 +58,7 @@ function Register() {
     } else {
       try {
         const response = await axios.post(
-          "https://westminster-real-estate-backend.onrender.com/api/user/register",
+          "http://localhost:5000/api/user/register",
           user
         );
         console.log(response);
