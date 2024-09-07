@@ -36,5 +36,5 @@ app.use('/api/owner-property', ownerPropertyRoute)
 
 // Server listening to PORT 5000
 app.listen(PORT, ()=>{
-    console.log(`Servers is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 })
