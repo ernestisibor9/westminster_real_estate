@@ -10,7 +10,7 @@ function LeaseProperty() {
   // Get All Poperties Based on Lease
   const getAllLeaseProperties = async () => {
     const response = await axios.get(
-      "http://localhost:5000/api/property/get-property-lease"
+      "https://westminster-real-estate-backend.onrender.com/api/property/get-property-lease"
     );
     setLeaseProperties(response.data.properties);
 
