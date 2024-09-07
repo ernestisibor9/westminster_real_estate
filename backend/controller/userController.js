@@ -27,7 +27,7 @@ const sendConfirmationEmail = (userEmail, userName, confirmationCode) => {
     html: `<h1>Email Confirmation</h1>
                <h2>Hello ${userName}</h2>
                <p>Thank you for registering. Please confirm your email by clicking on the following link</p>
-               <a href="http://localhost:5000/api/user/confirm/${confirmationCode}"> Click here</a>`,
+               <a href="https://westminster-real-estate-backend.onrender.com/api/user/confirm/${confirmationCode}"> Click here</a>`,
   };
 
   transporter.sendMail(mailOptions, function (err, info) {
