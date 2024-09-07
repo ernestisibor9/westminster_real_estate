@@ -5,19 +5,10 @@ const dbConnect = require('./config/dbConnect');
 const userRoute = require('./route/userRoute')
 const propertyRoute = require('./route/propertyRoute');
 const ownerPropertyRoute = require('./route/ownerPropertyRoute');
-const path = require('path');
+// const path = require('path');
 
 dotenv.config()
 const cors = require('cors')
-
-// Serve static assets if in production
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../frontend/real_estate/build')));
-  
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, '../frontend/real_estate', 'build', 'index.html'));
-    });
-  }
 
 // Connect to the database to 
 let PORT = process.env.PORT || 5000;
