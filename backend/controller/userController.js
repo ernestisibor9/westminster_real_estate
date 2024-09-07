@@ -98,7 +98,7 @@ const emailConfirmation = async (req, res) => {
     await user.save();
     // Redirect to the frontend confirmation page
     // res.redirect("http://localhost:3000/email-confirmed");
-    res.redirect("http://localhost:3000/login");
+    res.redirect("https://westminster-real-estate.onrender.com/login");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error" + err.message);
