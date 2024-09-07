@@ -30,7 +30,7 @@ function ListProperties() {
     setError("");
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/property/search-by-location",
+        "https://westminster-real-estate-backend.onrender.com/api/property/search-by-location",
         { query }
       );
       setFeaturedProperties(response.data);
@@ -56,7 +56,7 @@ function ListProperties() {
     setError("");
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/property/search-for",
+        "https://westminster-real-estate-backend.onrender.com/api/property/search-for",
         { propertyFor }
       );
       setFeaturedProperties(response.data);
@@ -102,7 +102,7 @@ useEffect(() => {
   // Get All Featured Poperties
   const getAllFeaturedProperties = async () => {
     const response = await axios.get(
-      "http://localhost:5000/api/property/get-all-properties"
+      "https://westminster-real-estate-backend.onrender.com/api/property/get-all-properties"
     );
     setFeaturedProperties(response.data);
     console.log(response.data);
