@@ -1,0 +1,16 @@
+.herobg{
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../../assets/house1.jpg');
+    height: 70vh;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.herobg h1{
+    margin-left: 10px !important;
+    color: #fff!important;
+    font-weight: bold !important;
+    font-size: 4rem !important;
+}
+.agent{
+    padding-top: 70px;
+}

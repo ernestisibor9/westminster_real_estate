@@ -1,0 +1,45 @@
+h3 {
+    display: inline-block;
+    position: relative; /* Required for positioning the pseudo-element */
+    padding-bottom: 10px; /* Space for the border */
+    font-size: 20px;
+}
+
+h3::after {
+    content: '';
+    position: absolute;
+    left: 50%; /* Start from the middle */
+    bottom: 0;
+    transform: translateX(-50%); /* Center the border */
+    width: 10%; /* Change this value to increase/reduce border length */
+    height: 2px; /* Thickness of the border ooo*/
+    background-color: red; /* Color of the border */
+    transition: width 0.3s ease; /* Animation for hover effect */
+}
+/* Base styles for the image */
+.hover-image {
+    width: 300px;
+    height: auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Styles for the hover effect */
+.hover-image:hover {
+    transform: scale(1.1); /* Scale up the image */
+    opacity: 0.8; /* Change the opacity */
+    margin-bottom: 10px;
+}
+.feat-style{
+    text-decoration: none;
+    color: #000;
+}
+.feat-style:hover{
+    text-decoration: none;
+    color: blue;
+}
+.my-img{
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}

@@ -1,0 +1,36 @@
+/* .navbar{
+    margin-top: 5px;
+} */
+.navbar .nav-link{
+    margin-right: 30px !important;
+}
+.navbar .nav-link:hover{
+    color: red !important;
+    transition: color 0.3s ease-in-out;
+    transform: scale(1.1);
+}
+.navbar .navbar-brand{
+    margin: 0 10px !important;
+}
+.navbar .active{
+	padding-bottom: 2px;
+	border-bottom: 3px solid red;
+    transition: all 0.3s ease-in-out;
+    transform: translateX(2%);
+    width: 20%;
+}
+.navbar-toggler{
+    border: none !important;
+    outline: none !important;
+}
+.navbar-toggler:focus{
+    box-shadow: none !important;
+}
+.navbar .fabars{
+    font-size: 1.5rem !important;
+    color: #000;
+}
+.btn-danger{
+    margin-right: 20px !important;
+}
+

@@ -1,0 +1,22 @@
+h3 {
+    display: inline-block;
+    position: relative; /* Required for positioning the pseudo-element */
+    padding-bottom: 10px; /* Space for the border */
+    font-size: 20px;
+}
+
+h3::after {
+    content: '';
+    position: absolute;
+    left: 50%; /* Start from the middle */
+    bottom: 0;
+    transform: translateX(-50%); /* Center the border */
+    width: 60%; /* Change this value to increase/reduce border length */
+    height: 2px; /* Thickness of the border */
+    background-color: red; /* Color of the border */
+    transition: width 0.3s ease; /* Animation for hover effect */
+}
+
+.custom-border:hover::after {
+    width: 100%; /* Change this value to the desired hover effect length */
+}

@@ -1,0 +1,117 @@
+.dashboard-bg{
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../../assets/house2.jpg');
+    height: 30vh;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.dashboard-head h1{
+    font-size: 2.8rem;
+    color: white;
+    text-align: center;
+    padding-top: 58px;
+}
+ul li{
+    list-style: none;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    /* text-align: center; */
+    color: #fff;
+    text-decoration: none;
+}
+.sidebar{
+    height: 120vh;
+}
+.log{
+    background-color: transparent;
+    color: #fff !important;
+    margin-left: -10px;
+}
+.menu-item{
+    color: #fff;
+}
+.menu-item:hover{
+    transform: scale(1.1);
+    color: brown;
+    font-weight: bold;
+}
+.stathome{
+    background-color: blue;
+    color: white;
+    /* width: 70px;
+    height: 70px; */
+    padding: 5px;
+    border-radius: 10px;
+}
+.stathome h1{
+    font-size: 3.5rem;
+}
+.stathome p{
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.statusers{
+    background-color: purple;
+    color: white;
+    /* width: 70px;
+    height: 70px; */
+    padding: 5px;
+    border-radius: 10px;
+}
+.statusers h1{
+    font-size: 3.5rem;
+}
+.statusers p{
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.statactive{
+    background-color: green;
+    color: white;
+    /* width: 70px;
+    height: 70px; */
+    padding: 5px;
+    border-radius: 10px;
+}
+.statactive h1{
+    font-size: 3.5rem;
+}
+.statactive p{
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.statpending{
+    background-color: red;
+    color: white;
+    /* width: 70px;
+    height: 70px; */
+    padding: 5px;
+    border-radius: 10px;
+}
+.statpending h1{
+    font-size: 3.5rem;
+}
+.statpending p{
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+
+.fahome{
+    font-size: 3rem;
+    color: white;
+}
+small{
+    color: #fff;
+    font-size: 0.4rem;
+}
+
+
+@media screen and (max-width: 520px) {
+    .sidebar{
+        height: 40vh;
+    }
+  }

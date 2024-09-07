@@ -1,0 +1,180 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+
+    overflow-x: hidden;
+}
+
+.navbar .active {
+    padding-bottom: 2px;
+    border-bottom: 1px solid #DC3545;
+
+    transition: all 0.3s ease-in-out;
+    transform: translateX(2%);
+
+}
+
+.ff-raleway {
+    font-family: 'Lato';
+}
+
+.fs-7 {
+    font-size: 0.9rem !important;
+}
+
+.fs-8 {
+    font-size: 0.8rem
+}
+
+.fs-8-5 {
+    font-size: 0.7rem;
+}
+
+.fs-9 {
+    font-size: 0.5rem;
+}
+
+.navbar-toggler:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.bg-image-gradient-1 {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)),
+        url('https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271_640.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.text-grey {
+    color: #6c757d;
+}
+
+.border-grey {
+    border-color: #6c757d;
+}
+
+.bg-grey {
+    background-color: #6c757d;
+}
+
+.text-grey-light {
+    color: #7777;
+}
+
+.bg-danger-light {
+    background-color: #f74455 !important;
+}
+
+.no-focus:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.active option:focus {
+    background-color: #f74455 !important;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.bg-image-gradient {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)),
+        url('https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271_640.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.w-fit-content {
+    width: fit-content;
+}
+
+.h-fit-content {
+    height: fit-content;
+}
+
+.text-grey {
+    color: #6c757d;
+}
+
+.bg-grey {
+    background-color: #6c757d;
+}
+
+.hover_danger:hover {
+    cursor: pointer;
+    color: #fff !important;
+    background-color: #DC3545 !important;
+}
+
+.text-white-light {
+    color: #aaaaaa !important;
+}
+
+.bg-footer {
+    background-color: #222;
+}
+
+.start-t {
+    left: 90%;
+    top: 5px;
+}
+.location{
+    position: relative;
+}
+.car-con{
+    position: absolute;
+    right: 200px;
+    top: 20px;
+}
+.fa-car{
+    font-size: 1.4rem;
+    margin-right: 6px;
+}
+.fa-map{
+    font-size: 1.4rem;
+    margin-right: 6px;
+}
+.cancel{
+    position: absolute;
+    /* bottom: 20px; */
+    right: 30px;
+}
+
+
+@media screen and (max-width: 520px) {
+    .car-con{
+        display: none;
+    }
+  }

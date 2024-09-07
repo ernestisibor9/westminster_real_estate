@@ -1,0 +1,35 @@
+.register-bg{
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../../assets/house2.jpg');
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.card-form{
+    margin-top: 50px;
+}
+.link-bottom{
+    text-decoration: none;
+    color: blue;
+    font-size: bold;
+}
+.link-bottom .home{
+    text-decoration: none;
+    color: blue;
+    font-size: bold;
+}
+.link-bottom .home:hover{
+    text-decoration: none;
+    color: red;
+    font-size: bold;
+}
+.pass{
+    position: relative;
+}
+.eyereg{
+    position: absolute;
+    bottom: 189px;
+    right: 42px;
+    cursor: pointer;
+    font-size: 1.3rem;
+}
