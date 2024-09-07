@@ -29,7 +29,7 @@ function AddProperty() {
     try {
       const token = JSON.parse(localStorage.getItem("user"));
       const response = await axios.get(
-        "http://localhost:5000/api/user/getloggedinuser",
+        "https://westminster-real-estate-backend.onrender.com/api/user/getloggedinuser",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -91,7 +91,7 @@ function AddProperty() {
       try {
         const token = JSON.parse(localStorage.getItem("user"));
         const response = await axios.post(
-          "http://localhost:5000/api/property/create-properties",
+          "https://westminster-real-estate-backend.onrender.com/api/property/create-properties",
           formData,
           {
             headers: {
