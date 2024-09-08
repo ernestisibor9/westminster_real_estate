@@ -56,7 +56,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchDocumentCount = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/property/count-all-properties');
+        const response = await axios.get('https://westminster-real-estate-backend.onrender.com/api/property/count-all-properties');
         console.log(response.data);
         
         setCount(response.data);
@@ -91,7 +91,7 @@ function Dashboard() {
     useEffect(() => {
       const fetchDocumentCount = async () => {
         try {
-          const response = await axios.get('http://localhost:5000/api/property/count-active-properties');
+          const response = await axios.get('https://westminster-real-estate-backend.onrender.com/api/property/count-active-properties');
           console.log(response.data);
           
           setCountActive(response.data.count);
