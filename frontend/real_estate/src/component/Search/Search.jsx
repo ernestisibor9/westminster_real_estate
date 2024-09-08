@@ -103,7 +103,7 @@ function Search() {
     setError("");
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/property/search-for",
+        "https://westminster-real-estate-backend.onrender.com/api/property/search-for",
         { propertyFor }
       );
       setFeaturedProperties(response.data);
