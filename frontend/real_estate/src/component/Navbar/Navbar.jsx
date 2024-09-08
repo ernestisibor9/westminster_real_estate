@@ -28,7 +28,7 @@ function Navbar() {
     try {
       const token = JSON.parse(localStorage.getItem("user"));
       const response = await axios.get(
-        "https://westminster-real-estate-frontend.onrender.com/api/user/getloggedinuser",
+        "https://westminster-real-estate-backend.onrender.com/api/user/getloggedinuser",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -91,7 +91,7 @@ function Navbar() {
     } else {
       try {
         const response = await axios.post(
-          "https://westminster-real-estate-frontend.onrender.com/api/owner-property/owner-property",
+          "https://westminster-real-estate-backend.onrender.com/api/owner-property/owner-property",
           user
         );
         console.log(response);
