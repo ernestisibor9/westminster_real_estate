@@ -57,10 +57,7 @@ function Register() {
       return;
     } else {
       try {
-        const response = await axios.post(
-          "https://westminster-real-estate-backend.onrender.com/api/user/register",
-          user
-        );
+        const response = await axios.post("http://localhost:5000/api/user/register", user);
         console.log(response);
         if (response.data.success) {
           toast.success(response.data.message);
@@ -70,6 +67,7 @@ function Register() {
         }
       } catch (err) {
         console.log(err);
+        toast.error("User already exists");
       }
     }
   };
