@@ -95,7 +95,7 @@ const emailConfirmation = async (req, res) => {
     // user.confirmationCode = ''; // Clear the confirmation code
     await user.save();
     
-    res.redirect("https://westminster-real-estate.onrender.com/login");
+    res.redirect("https://westminster-real-estate-frontend.onrender.com/login");
   } catch (err) {
     console.error("Error during email confirmation:", err); // Log the error
     res.status(500).send("Server error: " + err.message);
