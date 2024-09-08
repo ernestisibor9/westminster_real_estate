@@ -27,7 +27,7 @@ const sendConfirmationEmail = (userEmail, userName, confirmationCode) => {
     html: `<h1>Email Confirmation</h1>
                <h2>Hello ${userName}</h2>
                <p>Thank you for registering. Please confirm your email by clicking on the following link</p>
-               <a href="https://westminster-real-estate-backend.onrender.com/api/user/confirm/${confirmationCode}"> Click here</a>`,
+               <a href="http://localhost:5000/api/user/confirm/${confirmationCode}"> Click here</a>`,
   };
 
   transporter.sendMail(mailOptions, function (err, info) {
@@ -40,8 +40,8 @@ const sendConfirmationEmail = (userEmail, userName, confirmationCode) => {
 };
 
 // Register a user
-// Register a user
 const registerUser = async (req, res) => {
+  console.log("Request body:", req.body); // Log the request body
   const { name, email, password, phone } = req.body;
   try {
     const findIfUserExist = await User.findOne({ email: email });
@@ -51,61 +51,57 @@ const registerUser = async (req, res) => {
         message: "User already exists",
       });
     }
-    // Encrypt the password
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    // Create a new User
-    // const confirmationCode = crypto.randomBytes(16).toString("hex");
+    const confirmationCode = crypto.randomBytes(16).toString("hex");
+
     const addUser = new User({
       name: name,
       email: email,
       phone: phone,
       password: hashedPassword,
-      confirmationCode: confirmationCode, // Generate a confirmation code for email verification
+      confirmationCode: confirmationCode,
     });
+
     await addUser.save();
-    // Send the response to the client
     res.status(201).json({
       success: true,
       message: "User registered. Please check your email for confirmation.",
       addUser: addUser,
     });
-    // Send confirmation email
-    sendConfirmationEmail(
-      addUser.email,
-      addUser.name,
-      addUser.confirmationCode
-    );
+
+    sendConfirmationEmail(addUser.email, addUser.name, addUser.confirmationCode);
   } catch (err) {
+    console.error("Error in registration:", err); // Log the error
     res.status(500).json({ message: err.message });
   }
 };
 
 
-
 // Route to handle email confirmation
 const emailConfirmation = async (req, res) => {
   const { confirmationCode } = req.params;
-  // console.log(confirmationCode);
+  console.log("Received confirmation code:", confirmationCode); // Debugging
   
   try {
-    // Find the user with the matching confirmation code
     const user = await User.findOne({ confirmationCode });
     if (!user) {
+      console.log("Invalid confirmation code"); // Log if code is invalid
       return res.status(400).json({ message: "Invalid confirmation code" });
     }
-    // Confirm the user's email
+    
     user.isConfirmed = true;
     // user.confirmationCode = ''; // Clear the confirmation code
     await user.save();
-    // Redirect to the frontend confirmation page
-    // res.redirect("http://localhost:3000/email-confirmed");
-    res.redirect("https://westminster-real-estate.onrender.com/login");
+    
+    res.redirect("http://localhost:3000/login");
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error" + err.message);
+    console.error("Error during email confirmation:", err); // Log the error
+    res.status(500).send("Server error: " + err.message);
   }
 };
+
 
 // Login a user
 const loginUser = async (req, res) => {
