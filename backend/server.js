@@ -19,7 +19,7 @@ dbConnect()
     you will not be able to add any records to the database
 */
 app.use(express.json())
-app.use(cors())
+app.use(cors({ origin: 'https://westminster-real-estate-frontend.onrender.com'}))
 app.use('/api/user', userRoute)
 app.use('/api/property', propertyRoute)
 app.use('/api/owner-property', ownerPropertyRoute)
