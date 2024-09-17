@@ -193,22 +193,22 @@ const forgottenUserPassword = async (req, res) => {
 
     // Nodemailer
     var transporter = nodemailer.createTransport({
-      service: "gmail",
-      host: "smtp.gmail.com",
-      port: 587,
+       service: "smtp",
+  host: "sandbox.smtp.mailtrap.io",
+  port: 2525,
       secure: false, // true for 465, false for other ports
       // service: 'gmail',
-      auth: {
-        user: "ernestisibor9@gmail.com",
-        pass: "vodqjazgpznwrhzz",
-      },
+       auth: {
+    user: "8e61a470a5f69f",
+    pass: "1f20e52f5e17c3",
+  },
     });
 
     var mailOptions = {
       from: "ernestisibor9@gmail.com",
       to: `${PersonExist.email}`,
       subject: "Reset Your Password",
-      text: `http://localhost:3000/reset-password/${PersonExist._id}/${token}`,
+      text: `https://westminster-real-estate-frontend.onrender.com/reset-password/${PersonExist._id}/${token}`,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
